@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:48 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/23 20:03:52 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:12:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char *read_level() 
+char *read_level(char *levelname) 
 {
 	int fd;
 	ssize_t bytes_read;
 	char buffer[BUFFER_SIZE];
 	char *level_bytes = NULL;
 
-	fd = open("level.ber", O_RDONLY);
+	fd = open(levelname, O_RDONLY);
 	if (fd == -1) {
 		perror("Error opening file");
 		exit(2);
@@ -66,10 +66,10 @@ void check_level(char *level, t_level *level_stack)
         }
         i++;
     }
-	printf("Number of coins : %d\n", level_stack->coins);
     if (player_count != 1 || exit_count != 1 || level_stack->coins == 0)
     {
         printf("Invalid level configuration -- Exiting\n");
         exit(2);
     }
+	printf("Number of coins : %d\n", level_stack->coins);
 }
