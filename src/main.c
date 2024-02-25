@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/23 20:02:01 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/02/26 05:55:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,15 @@ int main(int ac, char **av)
 	int i = 0;
 	t_level *level_stack;
 
+	if(ac != 2)
+		return 1;
+
 	level_stack = malloc(sizeof(t_level));
-	level = read_level();
+	if(level_stack == NULL)
+		return 1;
+	level = read_level(av[1]);
 	check_level(level, level_stack);
+	ractangle_check(level,level_stack);
 	printf("\n\n");
 	while(level[i] != '\0')
 	{
@@ -56,5 +62,6 @@ int main(int ac, char **av)
 	}
 	printf("\n\n");
 	free(level);
+	free(level_stack);
 	return(0);
 }

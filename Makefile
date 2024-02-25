@@ -9,7 +9,7 @@ HEADER_SRCS	=	so_long.h
 HEADER_DIR	=	src/
 HEADER		=	$(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
-SRCPATH_SRCS	=	so_long.c main.c parsing.c
+SRCPATH_SRCS	=so_long.c main.c parsing.c init_stack.c
 SRCPATH_DIR	=	src/
 SRCPATH		=	$(addprefix $(SRCPATH_DIR), $(SRCPATH_SRCS))
 OBJ_SRC		=	$(SRCPATH:.c=.o)
