@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/26 05:52:07 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 17:14:25 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ typedef struct t_level
 	int rows;
 	int column;
 	int coins;
+	int player_pos;
+	int exit_pos;
 }			t_level;
 
 void init_level_stack();
 char *read_level();
 void check_level(char *level, t_level *level_stack);
 void ractangle_check(char *level, t_level *level_stack);
+void is_enclosed(char *level, t_level *level_stack);
+void find_player_exit(char *level, t_level *level_stack);
