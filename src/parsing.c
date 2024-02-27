@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:48 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/26 17:28:18 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/27 20:14:25 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,35 +138,61 @@ void is_enclosed(char *level, t_level *level_stack)
     }
 }
 
-void find_player_exit(char *level, t_level *level_stack)
+void find_player(t_level *level_stack)
 {
-	int player_pos;
-	int exit_pos;
+	int i;
+	int j;
+	int found;
+	t_player *player_stack;
 
-	player_pos = 0;
-	exit_pos = 0;
-
-	while(level[player_pos] != 'P')
-		player_pos++;
-	while(level[exit_pos] != 'E')
-		exit_pos++;
-	level_stack->player_pos = player_pos;
-	level_stack->exit_pos = exit_pos;
-	printf("player pos is %d\n", player_pos);
-	printf("exit pos is %d\n", exit_pos);
-}
-
-void path_finding(char *level, t_level *level_stack)
-{
-	int up = 0;
-	int down = 0;
-	int left = 0;
-	int right = 0;
-	int path_finder = 0;
-
-	while(path_finder != level_stack->exit_pos)
+	player_stack = malloc(sizeof(t_level));
+	found = 0;
+	i = 0;
+	while(i < level_stack->rows && !found)
 	{
-		path_finder = level_stack->player_pos;
-		if(level[path_finder + 1] == '1')
+		j = 0;
+		while(j < level_stack->column && !found)
+		{
+			if(level_stack->level[i][j] == 'P')
+			{
+			player_stack->pos_x = i;
+			player_stack->pos_y = j;
+			found = 1;
+			}
+			j++;
+		}
+		i++;
 	}
+	if(!found)
+		printf("Player not found\n");
+	printf("player is at X[%d] Y[%d]\n", player_stack->pos_x,player_stack->pos_y);
+}
+void find_exit(t_level *level_stack)
+{
+	int i;
+	int j;
+	int found;
+	t_exit *exit_stack;
+
+	exit_stack = malloc(sizeof(t_level));
+	found = 0;
+	i = 0;
+	while(i < level_stack->rows && !found)
+	{
+		j = 0;
+		while(j < level_stack->column && !found)
+		{
+			if(level_stack->level[i][j] == 'E')
+			{
+			exit_stack->pos_x = i;
+			exit_stack->pos_y = j;
+			found = 1;
+			}
+			j++;
+		}
+		i++;
+	}
+	if(!found)
+		printf("exit not found\n");
+	printf("Exit is at   X[%d] Y[%d]\n", exit_stack->pos_x,exit_stack->pos_y);
 }

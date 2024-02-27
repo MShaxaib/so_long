@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/26 17:24:34 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/27 20:12:54 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,14 @@ int main(int ac, char **av)
 	if(level_stack == NULL)
 		return 1;
 	level = read_level(av[1]);
+	level_stack->level = ft_split(level, '\n');
 	check_level(level, level_stack);
 	ractangle_check(level,level_stack);
 	is_enclosed(level, level_stack);
-	find_player_exit(level, level_stack);
+	find_player(level_stack);
+	find_exit(level_stack);
 	printf("\n\n");
+	i = 0;
 	while(level[i] != '\0')
 	{
 		printf("%c", level[i]);
