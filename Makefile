@@ -14,19 +14,24 @@ SRCPATH_DIR	=	src/
 SRCPATH		=	$(addprefix $(SRCPATH_DIR), $(SRCPATH_SRCS))
 OBJ_SRC		=	$(SRCPATH:.c=.o)
 
+UTILSPATH_SRCS	=ft_putchar_fd.c ft_putstr_fd.c ft_split.c ft_strlen.c ft_strncmp.c ft_substr.c
+UTILSPATH_DIR	=utils/
+UTILSPATH		=$(addprefix $(UTILSPATH_DIR), $(UTILSPATH_SRCS))
+OBJ_UTIL		=	$(UTILSPATH:.c=.o)
+
 #COMMANDS
 %.o: %.c $(HEADER) Makefile
 				@${CC} ${CFLAGS} -c $< -o $@
 
-$(NAME): 		$(OBJ_SRC)
-				@$(CC) $(CFLAGS) $(OBJ_SRC) -o $(NAME)
+$(NAME): 		$(OBJ_SRC) $(OBJ_UTIL)
+				@$(CC) $(CFLAGS) $(OBJ_SRC) $(OBJ_UTIL) -o $(NAME)
 				@echo "$(GREEN)$(NAME) Created!$(DEFAULT)"
 
 
 all:			$(NAME)
 
 clean:
-				@$(RM) $(OBJ_SRC)
+				@$(RM) $(OBJ_SRC) $(OBJ_UTIL)
 				@echo "$(YELLOW)Object Files Deleted!$(DEFAULT)"
 
 fclean:			clean
