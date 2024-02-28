@@ -9,12 +9,12 @@ HEADER_SRCS	=	so_long.h
 HEADER_DIR	=	src/
 HEADER		=	$(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
-SRCPATH_SRCS	=so_long.c main.c parsing.c init_stack.c
+SRCPATH_SRCS	=so_long.c main.c parsing.c init_stack.c path_finding.c
 SRCPATH_DIR	=	src/
 SRCPATH		=	$(addprefix $(SRCPATH_DIR), $(SRCPATH_SRCS))
 OBJ_SRC		=	$(SRCPATH:.c=.o)
 
-UTILSPATH_SRCS	=ft_split.c ft_strdup.c
+UTILSPATH_SRCS	=ft_split.c ft_strdup.c ft_memset.c
 UTILSPATH_DIR	=utils/
 UTILSPATH		=$(addprefix $(UTILSPATH_DIR), $(UTILSPATH_SRCS))
 OBJ_UTILS		=$(UTILSPATH:.c=.o)

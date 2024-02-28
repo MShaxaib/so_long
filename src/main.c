@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/27 20:12:54 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:51:38 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ int main(int ac, char **av)
 	is_enclosed(level, level_stack);
 	find_player(level_stack);
 	find_exit(level_stack);
+	if (path_finding(level_stack) == 0)
+		{
+			printf("no valid path to exit\n");
+			exit(2);
+		}
 	printf("\n\n");
 	i = 0;
 	while(level[i] != '\0')

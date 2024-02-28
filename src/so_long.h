@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/27 20:09:40 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:45:33 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ typedef struct t_level
 	int rows;
 	int column;
 	int coins;
-	int player_pos;
-	int exit_pos;
+	int	**visited;
 	char **level;
 }			t_level;
 
@@ -52,6 +51,13 @@ void find_exit(t_level *level_stack);
 
 //
 
+int check_path(t_level *ls, int start_x, int start_y, char endpoint);
+int path_finding(t_level *ls);
+int init_visited(t_level *ls, int malloced);
+
+//
+
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *s);
+void	*ft_memset(void *b, int c, size_t len);
