@@ -1,6 +1,8 @@
 NAME = so_long
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
+MLX_FLAGS	=	-L mlx -lmlx -framework OpenGL -framework AppKit
+MLX			=	mlx/libmlx.a
 RM			=	rm -rf
 
 
@@ -9,7 +11,7 @@ HEADER_SRCS	=	so_long.h
 HEADER_DIR	=	src/
 HEADER		=	$(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
-SRCPATH_SRCS	=so_long.c main.c parsing.c init_stack.c path_finding.c
+SRCPATH_SRCS	=so_long.c main.c parsing.c init_stack.c path_finding.c map_init.c
 SRCPATH_DIR	=	src/
 SRCPATH		=	$(addprefix $(SRCPATH_DIR), $(SRCPATH_SRCS))
 OBJ_SRC		=	$(SRCPATH:.c=.o)
@@ -23,15 +25,17 @@ OBJ_UTILS		=$(UTILSPATH:.c=.o)
 %.o: %.c $(HEADER) Makefile
 				@${CC} ${CFLAGS} -c $< -o $@
 
-$(NAME): 		$(OBJ_SRC) $(OBJ_UTILS)
-				@$(CC) $(CFLAGS) $(OBJ_SRC) $(OBJ_UTILS) -o $(NAME)
+$(NAME):		$(OBJ_SRC) $(OBJ_UTILS) $(MLX)
+				@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ_SRC) $(OBJ_UTILS) $(MLX) -o $(NAME) 
 				@echo "$(GREEN)$(NAME) Created!$(DEFAULT)"
-
+$(MLX):
+				@$(MAKE) -C mlx/
 
 all:			$(NAME)
 
 clean:
 				@$(RM) $(OBJ_SRC) $(OBJ_UTILS)
+				@$(MAKE) -C mlx/ clean
 				@echo "$(YELLOW)Object Files Deleted!$(DEFAULT)"
 
 fclean:			clean

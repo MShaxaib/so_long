@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/28 21:45:33 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:17:05 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../MLX/mlx.h"
 
 //to be replaced my my own libft
 #include <string.h>
@@ -61,3 +62,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
+
+// MLX
+
+void	level_init(t_level *level);

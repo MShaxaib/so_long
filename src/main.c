@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/28 21:51:38 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:16:23 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 int main(int ac, char **av)
 {
 	char *level;
-	int i = 0;
 	t_level *level_stack;
 
 	if(ac != 2)
@@ -50,25 +49,18 @@ int main(int ac, char **av)
 	if(level_stack == NULL)
 		return 1;
 	level = read_level(av[1]);
-	level_stack->level = ft_split(level, '\n');
+	level_stack->level = ft_split(level, '\n'); // memory stack
 	check_level(level, level_stack);
 	ractangle_check(level,level_stack);
 	is_enclosed(level, level_stack);
 	find_player(level_stack);
 	find_exit(level_stack);
-	if (path_finding(level_stack) == 0)
+	if (path_finding(level_stack) == 0) // memory stack
 		{
 			printf("no valid path to exit\n");
 			exit(2);
 		}
-	printf("\n\n");
-	i = 0;
-	while(level[i] != '\0')
-	{
-		printf("%c", level[i]);
-		i++;
-	}
-	printf("\n\n");
+	level_init(level_stack);
 	free(level);
 	free(level_stack);
 	return(0);
