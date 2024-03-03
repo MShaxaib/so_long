@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:44:47 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/29 17:02:28 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/03 22:32:27 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int check_path(t_level *ls, int start_x, int start_y, char endpoint)
 			|| check_path(ls, start_x - 1, start_y, endpoint)
 			|| check_path(ls, start_x, start_y - 1, endpoint));
 }
-int path_finding(t_level *ls)
+int path_finding(t_so_long *stack)
 {
 	int start_x;
 	int start_y;
@@ -81,15 +81,15 @@ int path_finding(t_level *ls)
 	start_x = 0;
 	start_y = 0;
 
-	ls->visited = malloc((ls->rows) * sizeof(int *));
-	if(ls->visited == NULL)
+	stack->level->visited = malloc((stack->level->rows) * sizeof(int *));
+	if(stack->level->visited == NULL)
 		return(0);
-	if(init_visited(ls, 0) == 0)
+	if(init_visited(stack->level, 0) == 0)
 		return(0);
-	endpoint = find_startpoint(ls, &start_x, &start_y);
-	if(check_path(ls, start_x, start_y, endpoint) == 0)
+	endpoint = find_startpoint(stack->level, &start_x, &start_y);
+	if(check_path(stack->level, start_x, start_y, endpoint) == 0)
 		return(0);
-	if(init_visited(ls, 1) == 0)
+	if(init_visited(stack->level, 1) == 0)
 		return(0);
 	return(1);
 }

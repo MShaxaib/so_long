@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:48 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 21:56:30 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/03 23:00:55 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ char *read_level(char *levelname)
 	return (level_bytes);
 }
 
-void check_level(char *level, t_level *level_stack)
+void check_level(char *level, t_so_long *stack)
 {
     int i = 0;
     int player_count = 0;
     int exit_count = 0;
 	
-	level_stack->coins  = 0;
+	stack->level->coins  = 0;
     while (level[i] != '\0')
     {
         if (level[i] == 'P')
@@ -57,7 +57,7 @@ void check_level(char *level, t_level *level_stack)
         else if (level[i] == 'E')
             exit_count++;
         else if (level[i] == 'C')
-            level_stack->coins++;
+            stack->level->coins++;
         else if (level[i] != '1' && level[i] != '0' && level[i] != '\n')
         {
             printf("Non valid char found in map -- Exiting\n");
@@ -65,13 +65,13 @@ void check_level(char *level, t_level *level_stack)
         }
         i++;
     }
-    if (player_count != 1 || exit_count != 1 || level_stack->coins == 0)
+    if (player_count != 1 || exit_count != 1 || stack->level->coins == 0)
     {
         printf("Invalid level configuration -- Exiting\n");
         exit(2);
     }
 }
-void ractangle_check(char *level, t_level *level_stack)
+void ractangle_check(char *level, t_so_long *stack)
 {
 	int i;
 	int j;
@@ -79,7 +79,7 @@ void ractangle_check(char *level, t_level *level_stack)
 
 	row_length = 0;
 	i = 0;
-	level_stack->rows = 1;
+	stack->level->rows = 1;
 	while(level[i] != '\0')
 	{
 		j = 0;
@@ -100,20 +100,20 @@ void ractangle_check(char *level, t_level *level_stack)
 		}
 		if(level[i] == '\n')
 		{
-			level_stack->rows++;
+			stack->level->rows++;
 			i++;
 		}
 	}
-	level_stack->column = j;
+	stack->level->column = j;
 }
 
-void is_enclosed(char *level, t_level *level_stack) 
+void is_enclosed(char *level, t_so_long *stack) 
 {
     int i; 
     int start_index;
 	
 	i = 0;
-	start_index = (level_stack->rows - 1) * (level_stack->column + 1);
+	start_index = (stack->level->rows - 1) * (stack->level->column + 1);
     while (level[i] != '\n') 
         if (level[i++] != '1') 
             exit(2);
@@ -122,34 +122,32 @@ void is_enclosed(char *level, t_level *level_stack)
         if (level[i++] != '1') 
             exit(2);
     i = 0;
-    while (i < level_stack->rows) 
+    while (i < stack->level->rows) 
 	{
-        if (level[i * (level_stack->column + 1)] != '1' || 
-            level[i * (level_stack->column + 1) + level_stack->column - 1] != '1') 
+        if (level[i * (stack->level->column + 1)] != '1' || 
+            level[i * (stack->level->column + 1) + stack->level->column - 1] != '1') 
             exit(2);
         i++;
     }
 }
 
-void find_player(t_level *level_stack)
+void find_player(t_so_long *stack)
 {
 	int i;
 	int j;
 	int found;
-	t_player *player_stack;
 
-	player_stack = malloc(sizeof(t_level));
 	found = 0;
 	i = 0;
-	while(i < level_stack->rows && !found)
+	while(i < stack->level->rows && !found)
 	{
 		j = 0;
-		while(j < level_stack->column && !found)
+		while(j < stack->level->column && !found)
 		{
-			if(level_stack->level[i][j] == 'P')
+			if(stack->level->level[i][j] == 'P')
 			{
-			player_stack->pos_x = i;
-			player_stack->pos_y = j;
+			stack->player->pos_y = i;
+			stack->player->pos_x = j;
 			found = 1;
 			}
 			j++;
@@ -158,27 +156,24 @@ void find_player(t_level *level_stack)
 	}
 	if(!found)
 		printf("Player not found\n");
-	printf("player is at X[%d] Y[%d]\n", player_stack->pos_x,player_stack->pos_y);
 }
-void find_exit(t_level *level_stack)
+void find_exit(t_so_long *stack)
 {
 	int i;
 	int j;
 	int found;
-	t_exit *exit_stack;
 
-	exit_stack = malloc(sizeof(t_level));
 	found = 0;
 	i = 0;
-	while(i < level_stack->rows && !found)
+	while(i < stack->level->rows && !found)
 	{
 		j = 0;
-		while(j < level_stack->column && !found)
+		while(j < stack->level->column && !found)
 		{
-			if(level_stack->level[i][j] == 'E')
+			if(stack->level->level[i][j] == 'E')
 			{
-			exit_stack->pos_x = i;
-			exit_stack->pos_y = j;
+			stack->player->pos_x = i;
+			stack->player->pos_y = j;
 			found = 1;
 			}
 			j++;
@@ -187,5 +182,4 @@ void find_exit(t_level *level_stack)
 	}
 	if(!found)
 		printf("exit not found\n");
-	printf("Exit is at   X[%d] Y[%d]\n", exit_stack->pos_x,exit_stack->pos_y);
 }

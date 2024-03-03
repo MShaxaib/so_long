@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 22:13:37 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/03 22:56:07 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ typedef struct t_so_long
 	t_player *player;
 }		t_so_long;
 
-void init_level_stack();
-char *read_level();
-void check_level(char *level, t_level *level_stack);
-void ractangle_check(char *level, t_level *level_stack);
-void is_enclosed(char *level, t_level *level_stack);
-void find_player(t_level *level_stack);
-void find_exit(t_level *level_stack);
+void init_level_stack(t_so_long *stack);
+char *read_level(char *levelname);
+void check_level(char *level, t_so_long *stack);
+void ractangle_check(char *level, t_so_long *stack);
+void is_enclosed(char *level, t_so_long *stack);
+void find_player(t_so_long *stack);
+void find_exit(t_so_long *stack);
 
 //
 
 int check_path(t_level *ls, int start_x, int start_y, char endpoint);
-int path_finding(t_level *ls);
+int path_finding(t_so_long *stack);
 int init_visited(t_level *ls, int malloced);
 
 //
@@ -92,8 +92,8 @@ void	*ft_memset(void *b, int c, size_t len);
 
 // MLX
 
-void	level_init();
+void	level_init(t_so_long *stack);
 
 // Player_controller
 
-void player_controller(t_level *ls, t_data *ds);
+void player_controller(t_so_long *stack, char dir);

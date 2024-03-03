@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 22:08:40 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/03 23:22:21 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,60 +23,62 @@ esc		= 53
 
 */ 
 
-int key_hook(int keycode, t_data *mlx)
+int key_hook(int keycode, t_so_long *stack)
 {
 	if (keycode == 53)
 	{
-		mlx_clear_window(mlx->mlx, mlx->mlx_win);
-		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+		mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+		mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
 		exit(0);
 	}
 	else if (keycode == 126)
-	{
-		
-	}
+		player_controller(stack, 'U');
+	else if (keycode == 125)
+		player_controller(stack, 'D');
+	else if (keycode == 124)
+		player_controller(stack, 'R');
+	else if (keycode == 123)
+		player_controller(stack, 'L');	
 	return(0);
 }
 
-void draw_level(t_data *t_data , t_level *level)
+void draw_level(t_so_long *stack)
 {
 	int i = 0;
 	int j = 0;
 
-	while(level->level[i] != NULL)
+	while(stack->level->level[i] != NULL)
 	{
 		j = 0;
-		while(level->level[i][j] != '\n' && level->level[i][j] != '\0')
+		while(stack->level->level[i][j] != '\n' && stack->level->level[i][j] != '\0')
 		{
-			mlx_put_image_to_window(t_data->mlx, t_data->mlx_win, t_data->background, j * 64 , i * 64);
-			if(level->level[i][j] == '1')
-				mlx_put_image_to_window(t_data->mlx, t_data->mlx_win, t_data->img_wall, j * 64 , i * 64);
-			else if(level->level[i][j] == 'P')
-				mlx_put_image_to_window(t_data->mlx, t_data->mlx_win, t_data->img_player, j * 64 , i * 64);
-			else if(level->level[i][j] == 'E')
-				mlx_put_image_to_window(t_data->mlx, t_data->mlx_win, t_data->img_exit, j * 64 , i * 64);
-			else if(level->level[i][j] == 'C')
-				mlx_put_image_to_window(t_data->mlx, t_data->mlx_win, t_data->background, j * 64 , i * 64);
+			mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background, j * 64 , i * 64);
+			if(stack->level->level[i][j] == '1')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_wall, j * 64 , i * 64);
+			else if(stack->level->level[i][j] == 'P')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_player, j * 64 , i * 64);
+			else if(stack->level->level[i][j] == 'E')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_exit, j * 64 , i * 64);
+			else if(stack->level->level[i][j] == 'C')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background, j * 64 , i * 64);
 		j++;
 		}
 	i++;
 	}
 }
 
-void	level_init(t_level *level)
+void	level_init(t_so_long *stack)
 {
-	t_data	*mlx_data;
 
-	mlx_data = malloc(sizeof(t_data));
-	mlx_data->mlx = mlx_init();
-	mlx_data->mlx_win = mlx_new_window(mlx_data->mlx, level->column * 64, level->rows * 64, "Hello world!");
-	if(!mlx_data)
+	stack->data->mlx = mlx_init();
+	stack->data->mlx_win = mlx_new_window(stack->data->mlx, stack->level->column * 64, stack->level->rows * 64, "Hello world!");
+	if(!stack->data)
 		exit(2);
-	mlx_data->img_wall = mlx_xpm_file_to_image(mlx_data->mlx, "imgs/grass.xpm", &mlx_data->w, &mlx_data->h);
-	mlx_data->img_player = mlx_xpm_file_to_image(mlx_data->mlx, "imgs/gengar.xpm", &mlx_data->w, &mlx_data->h);
-	mlx_data->img_exit = mlx_xpm_file_to_image(mlx_data->mlx, "imgs/pokeball.xpm", &mlx_data->w, &mlx_data->h);
-	mlx_data->background = mlx_xpm_file_to_image(mlx_data->mlx, "imgs/back.xpm", &mlx_data->w, &mlx_data->h);
-	draw_level(mlx_data, level);
-	mlx_key_hook(mlx_data->mlx_win, key_hook, &mlx_data->img_wall);
-	mlx_loop(mlx_data->mlx);
+	stack->data->img_wall = mlx_xpm_file_to_image(stack->data->mlx, "imgs/grass.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_player = mlx_xpm_file_to_image(stack->data->mlx, "imgs/pikachu.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_exit = mlx_xpm_file_to_image(stack->data->mlx, "imgs/pokeball.xpm", &stack->data->w, &stack->data->h);
+	stack->data->background = mlx_xpm_file_to_image(stack->data->mlx, "imgs/back.xpm", &stack->data->w, &stack->data->h);
+	draw_level(stack);
+	mlx_key_hook(stack->data->mlx_win, key_hook, stack);
+	mlx_loop(stack->data->mlx);
 }
