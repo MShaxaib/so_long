@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/29 18:16:23 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:41:04 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int main(int ac, char **av)
 			printf("no valid path to exit\n");
 			exit(2);
 		}
-	level_init(level_stack);
+	level_init();
 	free(level);
 	free(level_stack);
 	return(0);

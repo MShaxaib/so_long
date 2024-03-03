@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/29 18:17:05 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/02/29 23:01:24 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,22 @@ typedef struct t_exit
 	int pos_y;
 }		t_exit;
 
+typedef struct t_data
+{
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+	void	*replacement;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		i;
+	char	*path;
+	int		w;
+	int		h;
+}		t_data;
+
 void init_level_stack();
 char *read_level();
 void check_level(char *level, t_level *level_stack);
@@ -65,4 +81,4 @@ void	*ft_memset(void *b, int c, size_t len);
 
 // MLX
 
-void	level_init(t_level *level);
+void	level_init();
