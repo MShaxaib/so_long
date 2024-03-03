@@ -2,7 +2,7 @@ NAME = so_long
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
 MLX_FLAGS	=	-L mlx -lmlx -framework OpenGL -framework AppKit
-MLX			=	mlx/libmlx.a
+MLX			=	MLX/libmlx.a
 RM			=	rm -rf
 
 

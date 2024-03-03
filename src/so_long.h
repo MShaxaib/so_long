@@ -46,13 +46,16 @@ typedef struct t_data
 {
 	void	*mlx;
 	void	*mlx_win;
-	void	*img;
-	void	*replacement;
+	void	*img_wall;
+	void	*img_player;
+	void	*img_exit;
+	void	*img_coin;
+	void	*img_enemy;
+	void	*background;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		i;
 	char	*path;
 	int		w;
 	int		h;

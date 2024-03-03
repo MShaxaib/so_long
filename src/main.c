@@ -60,7 +60,7 @@ int main(int ac, char **av)
 			printf("no valid path to exit\n");
 			exit(2);
 		}
-	level_init();
+	level_init(level_stack);
 	free(level);
 	free(level_stack);
 	return(0);
