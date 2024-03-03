@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/29 23:01:24 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/03 22:13:37 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ typedef struct t_data
 	int		h;
 }		t_data;
 
+typedef struct t_so_long
+{
+	t_data *data;
+	t_level *level;
+	t_exit *exit;
+	t_player *player;
+}		t_so_long;
+
 void init_level_stack();
 char *read_level();
 void check_level(char *level, t_level *level_stack);
@@ -85,3 +93,7 @@ void	*ft_memset(void *b, int c, size_t len);
 // MLX
 
 void	level_init();
+
+// Player_controller
+
+void player_controller(t_level *ls, t_data *ds);

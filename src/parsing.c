@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:48 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/27 20:14:25 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/03 21:56:30 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ char *read_level(char *levelname)
 		perror("Error opening file");
 		exit(2);
 	}
-	
 	level_bytes = malloc(BUFFER_SIZE * sizeof(char));
 	if (level_bytes == NULL) 
 	{
 		perror("Error allocating memory");
 		exit(1);
 	}
-
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read == -1) 
 	{
@@ -52,7 +50,6 @@ void check_level(char *level, t_level *level_stack)
     int exit_count = 0;
 	
 	level_stack->coins  = 0;
-
     while (level[i] != '\0')
     {
         if (level[i] == 'P')
@@ -73,7 +70,6 @@ void check_level(char *level, t_level *level_stack)
         printf("Invalid level configuration -- Exiting\n");
         exit(2);
     }
-	printf("Number of coins : %d\n", level_stack->coins);
 }
 void ractangle_check(char *level, t_level *level_stack)
 {
@@ -96,7 +92,6 @@ void ractangle_check(char *level, t_level *level_stack)
 			row_length = j;
 		else
 		{
-			
 			if(row_length != j)
 			{
 				printf("Map is not rectangle\n");
@@ -110,8 +105,6 @@ void ractangle_check(char *level, t_level *level_stack)
 		}
 	}
 	level_stack->column = j;
-	printf("Number of rows in the map are %d\n", level_stack->rows);
-	printf("Number of columns in the map are %d\n", j);
 }
 
 void is_enclosed(char *level, t_level *level_stack) 

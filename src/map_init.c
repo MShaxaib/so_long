@@ -6,38 +6,34 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/02/29 23:05:03 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/03 22:08:40 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
-// {
-// 	char	*dst;
+/*
+Key codes:
 
-// 	dst = data->addr + y * data->line_length + x * (data->bits_per_pixel / 8);
-// 	*(unsigned int*)dst = color;
-// }
+up 		= 126
+down 	= 125
+left	= 123
+right	= 124
+esc		= 53 
+
+*/ 
 
 int key_hook(int keycode, t_data *mlx)
 {
-	// if(keycode == 124)
-	// {
-	// 	mlx->i += 50;
-	// 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, mlx->i + 10, 0);
-	// }
-	// else if (keycode == 123)
-	// {
-	// 	mlx->i -= 50;
-	// 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, mlx->i + 10, 0);
-	// }
 	if (keycode == 53)
 	{
-		// mlx_destroy_image(mlx->mlx, mlx->img);
-		// mlx_destroy_image(mlx->mlx, mlx->replacement);
+		mlx_clear_window(mlx->mlx, mlx->mlx_win);
 		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
 		exit(0);
+	}
+	else if (keycode == 126)
+	{
+		
 	}
 	return(0);
 }
@@ -61,10 +57,6 @@ void draw_level(t_data *t_data , t_level *level)
 				mlx_put_image_to_window(t_data->mlx, t_data->mlx_win, t_data->img_exit, j * 64 , i * 64);
 			else if(level->level[i][j] == 'C')
 				mlx_put_image_to_window(t_data->mlx, t_data->mlx_win, t_data->background, j * 64 , i * 64);
-			// else if(level->level[i][j] == '0')
-			// {
-			// 	mlx_put_image_to_window(t_data->mlx, t_data->mlx_win, t_data->background, j * 64 , i * 64);
-			// }
 		j++;
 		}
 	i++;
