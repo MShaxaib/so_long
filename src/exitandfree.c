@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   exitandfree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:27:15 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 22:44:18 by mshazaib         ###   ########.fr       */
+/*   Created: 2024/03/04 19:43:43 by vtcsbza           #+#    #+#             */
+/*   Updated: 2024/03/04 19:45:25 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void init_level_stack(t_so_long *stack)
+void    exitandfree(t_so_long *stack)
 {
-	// checks
-	
-	stack->level = malloc(sizeof(t_level));
-	stack->data = malloc(sizeof(t_data));
-	stack->player = malloc(sizeof(t_data));
-	stack->exit = malloc(sizeof(t_data));
-	stack->level->coins_collected = 0;
+    mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+    mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
+    exit(0);
 }

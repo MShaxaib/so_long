@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 22:56:07 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:44:41 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct t_level
 	int rows;
 	int column;
 	int coins;
+	int coins_collected;
 	int	**visited;
 	char **level;
 }			t_level;
@@ -97,3 +98,7 @@ void	level_init(t_so_long *stack);
 // Player_controller
 
 void player_controller(t_so_long *stack, char dir);
+
+//
+
+void    exitandfree(t_so_long *stack);

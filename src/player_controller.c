@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controller.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 21:50:47 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 23:31:00 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:51:43 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void player_controller(t_so_long *stack, char dir)
 		if(stack->level->level[stack->player->pos_y - 1][stack->player->pos_x] == '1')
 			return;
 		if(stack->level->level[stack->player->pos_y - 1][stack->player->pos_x] == 'C')
-			stack->level->coins++;			
+			stack->level->coins_collected++;			
 		stack->level->level[stack->player->pos_y - 1][stack->player->pos_x] = 'P';
 		mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win,\
 		stack->data->img_player, stack->player->pos_x * 64 ,\
@@ -34,7 +34,7 @@ void player_controller(t_so_long *stack, char dir)
 		if(stack->level->level[stack->player->pos_y + 1][stack->player->pos_x] == '1')
 			return;
 		if(stack->level->level[stack->player->pos_y + 1][stack->player->pos_x] == 'C')
-			stack->level->coins++;
+			stack->level->coins_collected++;
 		stack->level->level[stack->player->pos_y + 1][stack->player->pos_x] = 'P';
 		mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win,\
 		stack->data->img_player, stack->player->pos_x * 64 ,\
@@ -45,7 +45,7 @@ void player_controller(t_so_long *stack, char dir)
 		if(stack->level->level[stack->player->pos_y][stack->player->pos_x - 1] == '1')
 			return;
 		if(stack->level->level[stack->player->pos_y][stack->player->pos_x - 1] == 'C')
-			stack->level->coins++;	
+			stack->level->coins_collected++;	
 		stack->level->level[stack->player->pos_y][stack->player->pos_x - 1] = 'P';
 		mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win,\
 		stack->data->img_player, (stack->player->pos_x - 1) * 64 ,\
@@ -56,7 +56,7 @@ void player_controller(t_so_long *stack, char dir)
 		if(stack->level->level[stack->player->pos_y][stack->player->pos_x + 1] == '1')
 			return;
 		if(stack->level->level[stack->player->pos_y - 1][stack->player->pos_x + 1] == 'C')
-			stack->level->coins++;	
+			stack->level->coins_collected++;	
 		stack->level->level[stack->player->pos_y][stack->player->pos_x + 1] = 'P';
 		mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win,\
 		stack->data->img_player, (stack->player->pos_x + 1) * 64 ,\

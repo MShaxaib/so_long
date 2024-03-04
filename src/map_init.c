@@ -27,6 +27,7 @@ int key_hook(int keycode, t_so_long *stack)
 {
 	if (keycode == 53)
 	{
+		printf("number of coins %d\n", stack->level->coins_collected);
 		mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
 		mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
 		exit(0);
