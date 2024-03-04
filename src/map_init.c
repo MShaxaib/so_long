@@ -60,7 +60,7 @@ void draw_level(t_so_long *stack)
 			else if(stack->level->level[i][j] == 'E')
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_exit, j * 64 , i * 64);
 			else if(stack->level->level[i][j] == 'C')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background, j * 64 , i * 64);
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_coin, j * 64 , i * 64);
 		j++;
 		}
 	i++;
@@ -78,7 +78,9 @@ void	level_init(t_so_long *stack)
 	stack->data->img_player = mlx_xpm_file_to_image(stack->data->mlx, "imgs/pikachu.xpm", &stack->data->w, &stack->data->h);
 	stack->data->img_exit = mlx_xpm_file_to_image(stack->data->mlx, "imgs/pokeball.xpm", &stack->data->w, &stack->data->h);
 	stack->data->background = mlx_xpm_file_to_image(stack->data->mlx, "imgs/back.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_coin = mlx_xpm_file_to_image(stack->data->mlx, "imgs/onigiri.xpm", &stack->data->w, &stack->data->h);
 	draw_level(stack);
+	// mlx_string_put(stack->data->mlx, stack->data->mlx_win, 10, 50, 0xFF, stack->level->coins);
 	mlx_key_hook(stack->data->mlx_win, key_hook, stack);
 	mlx_loop(stack->data->mlx);
 }
