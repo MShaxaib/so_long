@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 23:22:21 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/04 21:12:58 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int key_hook(int keycode, t_so_long *stack)
 {
 	if (keycode == 53)
 	{
-		printf("number of coins %d\n", stack->level->coins_collected);
 		mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
 		mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
 		exit(0);
