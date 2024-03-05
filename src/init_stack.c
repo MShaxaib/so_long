@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:27:15 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 22:44:18 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/05 09:16:07 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void init_level_stack(t_so_long *stack)
 	stack->player = malloc(sizeof(t_data));
 	stack->exit = malloc(sizeof(t_data));
 	stack->level->coins_collected = 0;
+	stack->level->moves = 0;
 }

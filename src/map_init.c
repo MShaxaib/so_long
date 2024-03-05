@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/04 21:12:58 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/05 09:48:14 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ esc		= 53
 
 int key_hook(int keycode, t_so_long *stack)
 {
+	mlx_string_put(stack->data->mlx, stack->data->mlx_win, 30, 50, 0x00FF0000, ft_itoa(stack->level->moves));
+	printf("number of moves : %s\n", ft_itoa(stack->level->moves));
 	if (keycode == 53)
 	{
 		mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
@@ -80,7 +82,6 @@ void	level_init(t_so_long *stack)
 	stack->data->background = mlx_xpm_file_to_image(stack->data->mlx, "imgs/back.xpm", &stack->data->w, &stack->data->h);
 	stack->data->img_coin = mlx_xpm_file_to_image(stack->data->mlx, "imgs/onigiri.xpm", &stack->data->w, &stack->data->h);
 	draw_level(stack);
-	// mlx_string_put(stack->data->mlx, stack->data->mlx_win, 10, 50, 0xFF, stack->level->coins);
-	mlx_key_hook(stack->data->mlx_win, key_hook, stack);
+	mlx_hook(stack->data->mlx_win, 2, 0, key_hook, stack);
 	mlx_loop(stack->data->mlx);
 }

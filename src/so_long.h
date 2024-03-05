@@ -6,7 +6,7 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/04 19:44:41 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/05 09:15:09 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct t_level
 	int column;
 	int coins;
 	int coins_collected;
+	int moves;
 	int	**visited;
 	char **level;
 }			t_level;
@@ -90,6 +91,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
+char	*ft_itoa(int n);
 
 // MLX
 
