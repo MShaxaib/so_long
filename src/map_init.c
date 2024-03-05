@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/05 19:19:52 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:37:07 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	level_init(t_so_long *stack)
 {
 
 	stack->data->mlx = mlx_init();
-	stack->data->mlx_win = mlx_new_window(stack->data->mlx, stack->level->column * 64, (stack->level->rows + 0.5) * 64, "Pokemon - Midlife crisis pikachu wants to go home!");
+	stack->data->mlx_win = mlx_new_window(stack->data->mlx, stack->level->column * 64, (stack->level->rows + 0.5) * 64, "Pokemon - Pikachu wants to go home!!!!");
 	if(!stack->data)
 		exit(2);
 	stack->data->img_wall = mlx_xpm_file_to_image(stack->data->mlx, "imgs/grass.xpm", &stack->data->w, &stack->data->h);
