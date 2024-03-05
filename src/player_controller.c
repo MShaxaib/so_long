@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 21:50:47 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/05 18:15:01 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:03:10 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ void player_controller(t_so_long *stack, char dir)
 			}
 			return;
 		}
+		if(stack->level->level[stack->player->pos_y - 1][stack->player->pos_x] == 'M')
+		{
+				printf("<--------YOU DED-------->\n");
+				mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+				mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
+				exit(0);
+			return;
+		}
 		stack->level->level[stack->player->pos_y - 1][stack->player->pos_x] = 'P';
 		mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win,\
 		stack->data->img_player, stack->player->pos_x * 64 ,\
@@ -52,6 +60,14 @@ void player_controller(t_so_long *stack, char dir)
 				mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
 				exit(0);
 			}
+			return;
+		}
+		if(stack->level->level[stack->player->pos_y + 1][stack->player->pos_x] == 'M')
+		{
+				printf("<--------YOU DED-------->\n");
+				mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+				mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
+				exit(0);
 			return;
 		}
 		stack->level->level[stack->player->pos_y + 1][stack->player->pos_x] = 'P';
@@ -76,6 +92,14 @@ void player_controller(t_so_long *stack, char dir)
 			}
 			return;
 		}
+		if(stack->level->level[stack->player->pos_y][stack->player->pos_x - 1] == 'M')
+		{
+				printf("<--------YOU DED-------->\n");
+				mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+				mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
+				exit(0);
+			return;
+		}
 		stack->level->level[stack->player->pos_y][stack->player->pos_x - 1] = 'P';
 		mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win,\
 		stack->data->img_player, (stack->player->pos_x - 1) * 64 ,\
@@ -96,6 +120,14 @@ void player_controller(t_so_long *stack, char dir)
 				mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
 				exit(0);
 			}
+			return;
+		}
+		if(stack->level->level[stack->player->pos_y][stack->player->pos_x + 1] == 'M')
+		{
+				printf("<--------YOU DED-------->\n");
+				mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+				mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
+				exit(0);
 			return;
 		}
 		stack->level->level[stack->player->pos_y][stack->player->pos_x + 1] = 'P';

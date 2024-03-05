@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:48 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 23:00:55 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:59:15 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void check_level(char *level, t_so_long *stack)
     int i = 0;
     int player_count = 0;
     int exit_count = 0;
+    int enemy_count = 0;
 	
 	stack->level->coins  = 0;
     while (level[i] != '\0')
@@ -56,6 +57,8 @@ void check_level(char *level, t_so_long *stack)
             player_count++;
         else if (level[i] == 'E')
             exit_count++;
+        else if (level[i] == 'M')
+            enemy_count++;
         else if (level[i] == 'C')
             stack->level->coins++;
         else if (level[i] != '1' && level[i] != '0' && level[i] != '\n')
