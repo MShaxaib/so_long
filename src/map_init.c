@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/05 19:37:07 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:21:45 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ esc		= 53
 int key_hook(int keycode, t_so_long *stack)
 {
 	stack->data->black = mlx_new_image(stack->data->mlx, 400,328);
-	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->black, 0, 326);
-	mlx_string_put(stack->data->mlx, stack->data->mlx_win, 0, 326, 0x00FFCCFF, "Number of moves:");
-	mlx_string_put(stack->data->mlx, stack->data->mlx_win, 170, 326, 0x00FFCCFF, ft_itoa(stack->level->moves));
+	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->black, (stack->level->column - 13) * 64, stack->level->rows * 64);
+	mlx_string_put(stack->data->mlx, stack->data->mlx_win, (stack->level->column - 13) * 64, stack->level->rows * 64, 0x00FFCCFF, "Number of moves:");
+	mlx_string_put(stack->data->mlx, stack->data->mlx_win, (stack->level->column - 10.4) * 64, stack->level->rows * 64, 0x00FFCCFF, ft_itoa(stack->level->moves));
 	printf("number of moves : %s\n", ft_itoa(stack->level->moves));
 	if (keycode == 53)
 	{
