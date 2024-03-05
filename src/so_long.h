@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/05 09:15:09 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/05 18:13:41 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <string.h>
 
 #define BUFFER_SIZE 1024
+#define fps 25;
 
 typedef struct t_level
 {
@@ -54,6 +55,7 @@ typedef struct t_data
 	void	*img_coin;
 	void	*img_enemy;
 	void	*background;
+	void	*black;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;

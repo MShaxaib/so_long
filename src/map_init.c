@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/05 09:48:14 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/05 19:19:52 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ esc		= 53
 
 int key_hook(int keycode, t_so_long *stack)
 {
-	mlx_string_put(stack->data->mlx, stack->data->mlx_win, 30, 50, 0x00FF0000, ft_itoa(stack->level->moves));
+	stack->data->black = mlx_new_image(stack->data->mlx, 400,328);
+	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->black, 0, 326);
+	mlx_string_put(stack->data->mlx, stack->data->mlx_win, 0, 326, 0x00FFCCFF, "Number of moves:");
+	mlx_string_put(stack->data->mlx, stack->data->mlx_win, 170, 326, 0x00FFCCFF, ft_itoa(stack->level->moves));
 	printf("number of moves : %s\n", ft_itoa(stack->level->moves));
 	if (keycode == 53)
 	{
@@ -73,7 +76,7 @@ void	level_init(t_so_long *stack)
 {
 
 	stack->data->mlx = mlx_init();
-	stack->data->mlx_win = mlx_new_window(stack->data->mlx, stack->level->column * 64, stack->level->rows * 64, "Hello world!");
+	stack->data->mlx_win = mlx_new_window(stack->data->mlx, stack->level->column * 64, (stack->level->rows + 0.5) * 64, "Pokemon - Midlife crisis pikachu wants to go home!");
 	if(!stack->data)
 		exit(2);
 	stack->data->img_wall = mlx_xpm_file_to_image(stack->data->mlx, "imgs/grass.xpm", &stack->data->w, &stack->data->h);
