@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/05 20:55:42 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:46:27 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+
+int update(t_so_long *stack)
+{
+	// (void)stack;
+	if(stack->enemy->fps == 0)
+		stack->enemy->fps = 20;
+	move_enemy(stack);
+	mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+	draw_level(stack);
+	return(0);
+}
 
 void print_text(t_so_long *stack)
 {
@@ -75,7 +87,10 @@ void draw_level(t_so_long *stack)
 			else if(stack->level->level[i][j] == 'C')
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_coin, j * 64 , i * 64);
 			else if(stack->level->level[i][j] == 'M')
+			{
+				stack->enemy->ctr++;	
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_enemy, j * 64 , i * 64);
+			}
 		j++;
 		}
 	i++;
@@ -95,7 +110,8 @@ void	level_init(t_so_long *stack)
 	stack->data->background = mlx_xpm_file_to_image(stack->data->mlx, "imgs/back.xpm", &stack->data->w, &stack->data->h);
 	stack->data->img_coin = mlx_xpm_file_to_image(stack->data->mlx, "imgs/onigiri.xpm", &stack->data->w, &stack->data->h);
 	stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/gengar.xpm", &stack->data->w, &stack->data->h);
-	draw_level(stack);
+	// draw_level(stack);
+	mlx_loop_hook(stack->data->mlx, &update, stack);
 	mlx_hook(stack->data->mlx_win, 2, 0, key_hook, stack);
 	mlx_loop(stack->data->mlx);
 }

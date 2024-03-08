@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:48 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/05 20:59:15 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:37:38 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,33 @@ void find_player(t_so_long *stack)
 			{
 			stack->player->pos_y = i;
 			stack->player->pos_x = j;
+			found = 1;
+			}
+			j++;
+		}
+		i++;
+	}
+	if(!found)
+		printf("Player not found\n");
+}
+
+void find_enemy(t_so_long *stack)
+{
+	int i;
+	int j;
+	int found;
+
+	found = 0;
+	i = 0;
+	while(i < stack->level->rows && !found)
+	{
+		j = 0;
+		while(j < stack->level->column && !found)
+		{
+			if(stack->level->level[i][j] == 'M')
+			{
+			stack->enemy->pos_y = i;
+			stack->enemy->pos_x = j;
 			found = 1;
 			}
 			j++;

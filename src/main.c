@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/03 22:43:50 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:04:00 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void checks(t_so_long *stack, char *level)
 			exit(2);
 		}
 }
+
+// void update(t_so_long *stack)
+// {
+	
+// }
 
 void free_exit(t_so_long *stack, char *level)
 {

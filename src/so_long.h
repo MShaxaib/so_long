@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/05 18:13:41 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:49:58 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include <string.h>
 
 #define BUFFER_SIZE 1024
-#define fps 25;
 
 typedef struct t_level
 {
@@ -44,6 +43,15 @@ typedef struct t_exit
 	int pos_x;
 	int pos_y;
 }		t_exit;
+
+typedef struct t_enemy
+{
+	int pos_x;
+	int pos_y;
+	int ctr;
+	int fps;
+	int flag;
+}		t_enemy;
 
 typedef struct t_data
 {
@@ -71,6 +79,7 @@ typedef struct t_so_long
 	t_level *level;
 	t_exit *exit;
 	t_player *player;
+	t_enemy *enemy;
 }		t_so_long;
 
 void init_level_stack(t_so_long *stack);
@@ -79,6 +88,7 @@ void check_level(char *level, t_so_long *stack);
 void ractangle_check(char *level, t_so_long *stack);
 void is_enclosed(char *level, t_so_long *stack);
 void find_player(t_so_long *stack);
+void find_enemy(t_so_long *stack);
 void find_exit(t_so_long *stack);
 
 //
@@ -96,7 +106,7 @@ void	*ft_memset(void *b, int c, size_t len);
 char	*ft_itoa(int n);
 
 // MLX
-
+void draw_level(t_so_long *stack);
 void	level_init(t_so_long *stack);
 
 // Player_controller
@@ -106,3 +116,7 @@ void player_controller(t_so_long *stack, char dir);
 //
 
 void    exitandfree(t_so_long *stack);
+
+//
+
+void move_enemy(t_so_long *stack);
