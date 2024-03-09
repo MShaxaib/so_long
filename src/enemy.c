@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:40:19 by vtcsbza           #+#    #+#             */
-/*   Updated: 2024/03/09 17:14:35 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:48:45 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void anim_enemy(t_so_long *stack)
 {
-	printf("fps %d\n", stack->enemy->fps);
-	if(stack->enemy->flag == 1)
+	
+	if(stack->data->anim_fps >= 35)
 		stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-0.xpm", &stack->data->w, &stack->data->h);
-	stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-1.xpm", &stack->data->w, &stack->data->h);
+	if(stack->data->anim_fps < 35)
+		stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-1.xpm", &stack->data->w, &stack->data->h);
+	stack->data->anim_fps--;
 }
 
 void move_enemy(t_so_long *stack)
@@ -26,7 +28,7 @@ void move_enemy(t_so_long *stack)
 	int old_pos_y;
 
 	old_pos_x = stack->enemy->pos_x;
-	old_pos_y = stack->enemy->pos_y;Œ
+	old_pos_y = stack->enemy->pos_y;
 	find_enemy(stack);
 	if(stack->enemy->fps == 1)
 		{
@@ -43,8 +45,7 @@ void move_enemy(t_so_long *stack)
 								}
 								stack->level->level[old_pos_y][old_pos_x] = '0';
 								stack->level->level[stack->enemy->pos_y][stack->enemy->pos_x - 1] = 'M';
-								stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-1.xpm", &stack->data->w, &stack->data->h);
-						}    
+						}
 					else if(stack->level->level[old_pos_y][old_pos_x - 1] == '1' || stack->level->level[old_pos_y][old_pos_x - 1] == 'C')
 						stack->enemy->flag = 1;
 				}
@@ -61,7 +62,6 @@ void move_enemy(t_so_long *stack)
 								}
 							stack->level->level[old_pos_y][old_pos_x] = '0';
 							stack->level->level[stack->enemy->pos_y][stack->enemy->pos_x + 1] = 'M';
-							stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-1.xpm", &stack->data->w, &stack->data->h);
 						}
 					else if(stack->level->level[old_pos_y][old_pos_x + 1] == '1' || stack->level->level[old_pos_y][old_pos_x + 1] == 'C')
 						stack->enemy->flag = 0;

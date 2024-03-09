@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/09 17:13:38 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/09 22:03:44 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void draw_level(t_so_long *stack)
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_exit, j * 64 , i * 64);
 			else if(stack->level->level[i][j] == 'C')
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_coin, j * 64 , i * 64);
+			else if(stack->level->level[i][j] == '0')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background_D, j * 64 , i * 64);
 			else if(stack->level->level[i][j] == 'M')
 			{
 				stack->enemy->ctr++;
@@ -87,10 +89,14 @@ void draw_level(t_so_long *stack)
 int update(t_so_long *stack)
 {
 	if(stack->enemy->fps == 0)
-		stack->enemy->fps = 20;
-	anim_enemy(stack);
+		stack->enemy->fps = 30;
+	if(stack->data->anim_fps == 0)
+		stack->data->anim_fps = 70;
+	if(stack->data->anim_c_fps == 0)
+		stack->data->anim_c_fps = 30;
 	move_enemy(stack);
 	mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+	anim_enemy(stack);
 	draw_level(stack);
 	print_text(stack);
 	return(0);
@@ -109,6 +115,7 @@ void	level_init(t_so_long *stack)
 	stack->data->background = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/back.xpm", &stack->data->w, &stack->data->h);
 	stack->data->img_coin = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/onigiri.xpm", &stack->data->w, &stack->data->h);
 	stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-0.xpm", &stack->data->w, &stack->data->h);
+	stack->data->background_D = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/grass-dirt.xpm", &stack->data->w, &stack->data->h);
 	mlx_loop_hook(stack->data->mlx, &update, stack);
 	mlx_hook(stack->data->mlx_win, 2, 0, key_hook, stack);
 	mlx_loop(stack->data->mlx);

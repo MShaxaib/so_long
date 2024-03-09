@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:27:15 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/08 17:50:52 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/09 19:08:22 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void init_level_stack(t_so_long *stack)
 	stack->level->coins_collected = 0;
 	stack->level->moves = 1;
 	stack->enemy->ctr = 0;
-	stack->enemy->fps = 20;
+	stack->enemy->fps = 30;
+	stack->data->anim_fps = 70;
 	stack->enemy->flag = 0;
 }

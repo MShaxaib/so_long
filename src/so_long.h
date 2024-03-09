@@ -6,7 +6,7 @@
 /*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/09 17:11:08 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/09 22:03:08 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct t_data
 	void	*img_coin;
 	void	*img_enemy;
 	void	*background;
+	void	*background_D;
 	void	*black;
 	char	*addr;
 	int		bits_per_pixel;
@@ -71,6 +72,8 @@ typedef struct t_data
 	char	*path;
 	int		w;
 	int		h;
+	int		anim_fps;
+	int		anim_c_fps;
 }		t_data;
 
 typedef struct t_so_long
@@ -121,3 +124,4 @@ void    exitandfree(t_so_long *stack);
 
 void move_enemy(t_so_long *stack);
 void anim_enemy(t_so_long *stack);
+void anim_coin(t_so_long *stack);
