@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/08 17:49:58 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/09 17:11:08 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	*ft_memset(void *b, int c, size_t len);
 char	*ft_itoa(int n);
 
 // MLX
-void draw_level(t_so_long *stack);
+void 	draw_level(t_so_long *stack);
 void	level_init(t_so_long *stack);
 
 // Player_controller
@@ -120,3 +120,4 @@ void    exitandfree(t_so_long *stack);
 //
 
 void move_enemy(t_so_long *stack);
+void anim_enemy(t_so_long *stack);

@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/08 17:46:27 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/09 17:13:38 by mshazaib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
-int update(t_so_long *stack)
-{
-	// (void)stack;
-	if(stack->enemy->fps == 0)
-		stack->enemy->fps = 20;
-	move_enemy(stack);
-	mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
-	draw_level(stack);
-	return(0);
-}
 
 void print_text(t_so_long *stack)
 {
@@ -49,7 +37,7 @@ void print_text(t_so_long *stack)
 
 int key_hook(int keycode, t_so_long *stack)
 {
-	print_text(stack); //! its leaking probably : need to destroy stuff
+	 //! its leaking probably : need to destroy stuff
 	if (keycode == 53)
 	{
 		mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
@@ -88,13 +76,24 @@ void draw_level(t_so_long *stack)
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_coin, j * 64 , i * 64);
 			else if(stack->level->level[i][j] == 'M')
 			{
-				stack->enemy->ctr++;	
+				stack->enemy->ctr++;
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_enemy, j * 64 , i * 64);
 			}
 		j++;
 		}
 	i++;
 	}
+}
+int update(t_so_long *stack)
+{
+	if(stack->enemy->fps == 0)
+		stack->enemy->fps = 20;
+	anim_enemy(stack);
+	move_enemy(stack);
+	mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+	draw_level(stack);
+	print_text(stack);
+	return(0);
 }
 
 void	level_init(t_so_long *stack)
@@ -104,14 +103,15 @@ void	level_init(t_so_long *stack)
 	stack->data->mlx_win = mlx_new_window(stack->data->mlx, stack->level->column * 64, (stack->level->rows + 0.5) * 64, "Pokemon - Pikachu wants to go home!!!!");
 	if(!stack->data)
 		exit(2);
-	stack->data->img_wall = mlx_xpm_file_to_image(stack->data->mlx, "imgs/grass.xpm", &stack->data->w, &stack->data->h);
-	stack->data->img_player = mlx_xpm_file_to_image(stack->data->mlx, "imgs/pikachu.xpm", &stack->data->w, &stack->data->h);
-	stack->data->img_exit = mlx_xpm_file_to_image(stack->data->mlx, "imgs/pokeball.xpm", &stack->data->w, &stack->data->h);
-	stack->data->background = mlx_xpm_file_to_image(stack->data->mlx, "imgs/back.xpm", &stack->data->w, &stack->data->h);
-	stack->data->img_coin = mlx_xpm_file_to_image(stack->data->mlx, "imgs/onigiri.xpm", &stack->data->w, &stack->data->h);
-	stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/gengar.xpm", &stack->data->w, &stack->data->h);
-	// draw_level(stack);
+	stack->data->img_wall = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/grass.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_player = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/pikachu.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_exit = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/pokeball.xpm", &stack->data->w, &stack->data->h);
+	stack->data->background = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/back.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_coin = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/onigiri.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-0.xpm", &stack->data->w, &stack->data->h);
 	mlx_loop_hook(stack->data->mlx, &update, stack);
 	mlx_hook(stack->data->mlx_win, 2, 0, key_hook, stack);
 	mlx_loop(stack->data->mlx);
 }
+
+
