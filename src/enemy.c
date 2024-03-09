@@ -6,7 +6,7 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:40:19 by vtcsbza           #+#    #+#             */
-/*   Updated: 2024/03/08 17:52:40 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/09 01:25:03 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,38 @@ void move_enemy(t_so_long *stack)
 
 if(stack->enemy->fps == 1)
 {
-    // printf("flag %d\n", flag);
     if (stack->enemy->flag == 0)
     {
         if(stack->level->level[old_pos_y][old_pos_x - 1] != '1')
         {
+            if(stack->level->level[old_pos_y][old_pos_x - 1] == 'P')
+                {
+                    printf("<--------YOU DED-------->\n");
+                    mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+                    mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
+                    exit(0);
+                }
             stack->level->level[old_pos_y][old_pos_x] = '0';
             stack->level->level[stack->enemy->pos_y][stack->enemy->pos_x - 1] = 'M';
         }    
-        else if(stack->level->level[old_pos_y][old_pos_x - 1] == '1')
+        else if(stack->level->level[old_pos_y][old_pos_x - 1] == 'C' || stack->level->level[old_pos_y][old_pos_x - 1] == '1' || stack->level->level[old_pos_y][old_pos_x - 1] == 'E')
             stack->enemy->flag = 1;
     }
     else if(stack->enemy->flag == 1)
     {
         if(stack->level->level[old_pos_y][old_pos_x + 1] != '1')
         {
+            if(stack->level->level[old_pos_y][old_pos_x + 1] == 'P')
+                {
+                    printf("<--------YOU DED-------->\n");
+                    mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
+                    mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
+                    exit(0);
+                }
             stack->level->level[old_pos_y][old_pos_x] = '0';
             stack->level->level[stack->enemy->pos_y][stack->enemy->pos_x + 1] = 'M';
         }
-        else if(stack->level->level[old_pos_y][old_pos_x + 1] == '1')
+        else if(stack->level->level[old_pos_y][old_pos_x + 1] == 'C' || stack->level->level[old_pos_y][old_pos_x + 1] == '1' || stack->level->level[old_pos_y][old_pos_x + 1] == 'E')
             stack->enemy->flag = 0;
     }
 }
