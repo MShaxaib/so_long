@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdanish <mdanish@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:48 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/08 15:37:38 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/10 15:39:220 by mdanish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void check_level(char *level, t_so_long *stack)
     int i = 0;
     int player_count = 0;
     int exit_count = 0;
-    int enemy_count = 0;
 	
 	stack->level->coins  = 0;
     while (level[i] != '\0')
@@ -58,7 +57,7 @@ void check_level(char *level, t_so_long *stack)
         else if (level[i] == 'E')
             exit_count++;
         else if (level[i] == 'M')
-            enemy_count++;
+            stack->enemy->ctr++;
         else if (level[i] == 'C')
             stack->level->coins++;
         else if (level[i] != '1' && level[i] != '0' && level[i] != '\n')
@@ -73,6 +72,7 @@ void check_level(char *level, t_so_long *stack)
         printf("Invalid level configuration -- Exiting\n");
         exit(2);
     }
+	
 }
 void ractangle_check(char *level, t_so_long *stack)
 {
@@ -161,32 +161,39 @@ void find_player(t_so_long *stack)
 		printf("Player not found\n");
 }
 
-void find_enemy(t_so_long *stack)
+void find_enemy(t_so_long *stack, int counter)		//// BIG CHANGE
 {
 	int i;
 	int j;
-	int found;
+	int enemy_number;
+	
 
-	found = 0;
+	enemy_number = 0;
 	i = 0;
-	while(i < stack->level->rows && !found)
+	while(i < stack->level->rows)
 	{
 		j = 0;
-		while(j < stack->level->column && !found)
+		while(j < stack->level->column)
 		{
 			if(stack->level->level[i][j] == 'M')
+				enemy_number++;
+			if (enemy_number == counter)
 			{
-			stack->enemy->pos_y = i;
-			stack->enemy->pos_x = j;
-			found = 1;
+				stack->enemy->pos_y[counter - 1] = i;
+				stack->enemy->pos_x[counter - 1] = j;
+				// printf("(%d, %d)\n", j, i);
+				break;
 			}
 			j++;
 		}
+		if (enemy_number == counter)
+			break ;
 		i++;
 	}
-	if(!found)
-		printf("Player not found\n");
+	if(!enemy_number)
+		printf("Enemies not found\n");
 }
+
 void find_exit(t_so_long *stack)
 {
 	int i;

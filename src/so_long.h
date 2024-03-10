@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/09 22:03:08 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:40:34 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ typedef struct t_exit
 
 typedef struct t_enemy
 {
-	int pos_x;
-	int pos_y;
+	int *pos_x;
+	int *pos_y;
 	int ctr;
 	int fps;
-	int flag;
+	int *flag;
 }		t_enemy;
 
 typedef struct t_data
@@ -91,7 +91,7 @@ void check_level(char *level, t_so_long *stack);
 void ractangle_check(char *level, t_so_long *stack);
 void is_enclosed(char *level, t_so_long *stack);
 void find_player(t_so_long *stack);
-void find_enemy(t_so_long *stack);
+void find_enemy(t_so_long *stack, int counter);
 void find_exit(t_so_long *stack);
 
 //
@@ -122,6 +122,6 @@ void    exitandfree(t_so_long *stack);
 
 //
 
-void move_enemy(t_so_long *stack);
+void move_enemy(t_so_long *stack, int counter);
 void anim_enemy(t_so_long *stack);
 void anim_coin(t_so_long *stack);

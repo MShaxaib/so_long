@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/09 22:03:44 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:40:42 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,10 @@ void draw_level(t_so_long *stack)
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_exit, j * 64 , i * 64);
 			else if(stack->level->level[i][j] == 'C')
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_coin, j * 64 , i * 64);
-			else if(stack->level->level[i][j] == '0')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background_D, j * 64 , i * 64);
+			// else if(stack->level->level[i][j] == '0')
+			// 	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background_D, j * 64 , i * 64);
 			else if(stack->level->level[i][j] == 'M')
-			{
-				stack->enemy->ctr++;
 				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_enemy, j * 64 , i * 64);
-			}
 		j++;
 		}
 	i++;
@@ -94,7 +91,12 @@ int update(t_so_long *stack)
 		stack->data->anim_fps = 70;
 	if(stack->data->anim_c_fps == 0)
 		stack->data->anim_c_fps = 30;
-	move_enemy(stack);
+	for (int counter = 0; counter < stack->enemy->ctr; counter++){
+		move_enemy(stack, counter);
+	};
+	stack->enemy->fps--;
+	memset(stack->enemy->pos_x, 0, sizeof(int) * stack->enemy->ctr);
+	memset(stack->enemy->pos_y, 0, sizeof(int) * stack->enemy->ctr);
 	mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
 	anim_enemy(stack);
 	draw_level(stack);

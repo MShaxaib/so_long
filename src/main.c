@@ -6,7 +6,7 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/08 17:04:00 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/10 16:26:15 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void checks(t_so_long *stack, char *level)
 			printf("no valid path to exit\n");
 			exit(2);
 		}
+	stack->enemy->pos_x = calloc(sizeof(int), stack->enemy->ctr);		//Change
+	stack->enemy->pos_y = calloc(sizeof(int), stack->enemy->ctr);		//Change
+	stack->enemy->flag  = calloc(sizeof(int), stack->enemy->ctr);		//Change
 }
 
 // void update(t_so_long *stack)

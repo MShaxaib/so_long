@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:27:15 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/09 19:08:22 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:39:51 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void init_level_stack(t_so_long *stack)
 	stack->enemy = malloc(sizeof(t_enemy));
 	stack->level->coins_collected = 0;
 	stack->level->moves = 1;
-	stack->enemy->ctr = 0;
+	stack->enemy->ctr = 0	;
 	stack->enemy->fps = 30;
 	stack->data->anim_fps = 70;
 	stack->enemy->flag = 0;
