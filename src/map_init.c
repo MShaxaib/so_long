@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/10 16:40:42 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/11 08:25:15 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void print_text(t_so_long *stack)
+void	print_text(t_so_long *stack)
 {
-	stack->data->black = mlx_new_image(stack->data->mlx, 1000,328);
-	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win,\
-	stack->data->black, (stack->level->column - 14) * 64,\
+	stack->data->black = mlx_new_image(stack->data->mlx, 1000, 328);
+	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, \
+	stack->data->black, (stack->level->column - 14) * 64, \
 	(stack->level->rows) * 64);
 	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
-	(stack->level->column - 12.8) * 64, stack->level->rows * 64,\
+	(stack->level->column - 12.8) * 64, stack->level->rows * 64, \
 	0x00FFCCFF, "Number of moves:");
 	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
-	(stack->level->column - 10.3) * 64, stack->level->rows * 64,\
+	(stack->level->column - 10.3) * 64, stack->level->rows * 64, \
 	0x00FFCCFF, ft_itoa(stack->level->moves));
 	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
-	(stack->level->column - 3.5) * 64, stack->level->rows * 64,\
+	(stack->level->column - 3.5) * 64, stack->level->rows * 64, \
 	0x00FFCCFF, "Coins Collected:  /");
 	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
 	(stack->level->column - 0.9) * 64, stack->level->rows * 64, \
@@ -35,9 +35,8 @@ void print_text(t_so_long *stack)
 	0x00FFCCFF, ft_itoa(stack->level->coins));
 }
 
-int key_hook(int keycode, t_so_long *stack)
+int	key_hook(int keycode, t_so_long *stack)
 {
-	 //! its leaking probably : need to destroy stuff
 	if (keycode == 53)
 	{
 		mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
@@ -51,76 +50,88 @@ int key_hook(int keycode, t_so_long *stack)
 	else if (keycode == 124)
 		player_controller(stack, 'R');
 	else if (keycode == 123)
-		player_controller(stack, 'L');	
-	return(0);
+		player_controller(stack, 'L');
+	return (0);
 }
 
-void draw_level(t_so_long *stack)
+void	draw_level(t_so_long *stack)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
-	while(stack->level->level[i] != NULL)
+	i = 0;
+	j = 0;
+	while (stack->level->level[i] != NULL)
 	{
 		j = 0;
-		while(stack->level->level[i][j] != '\n' && stack->level->level[i][j] != '\0')
+		while (stack->level->level[i][j] != '\n' && stack->level->level[i][j] != '\0')
 		{
-			mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background, j * 64 , i * 64);
-			if(stack->level->level[i][j] == '1')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_wall, j * 64 , i * 64);
-			else if(stack->level->level[i][j] == 'P')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_player, j * 64 , i * 64);
-			else if(stack->level->level[i][j] == 'E')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_exit, j * 64 , i * 64);
-			else if(stack->level->level[i][j] == 'C')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_coin, j * 64 , i * 64);
-			// else if(stack->level->level[i][j] == '0')
-			// 	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background_D, j * 64 , i * 64);
-			else if(stack->level->level[i][j] == 'M')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_enemy, j * 64 , i * 64);
-		j++;
+			mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background, j * 64, i * 64);
+			if (stack->level->level[i][j] == '1')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_wall, j * 64, i * 64);
+			else if (stack->level->level[i][j] == 'P')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_player, j * 64, i * 64);
+			else if (stack->level->level[i][j] == 'E')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_exit, j * 64, i * 64);
+			else if (stack->level->level[i][j] == 'C')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_coin, j * 64, i * 64);
+			else if (stack->level->level[i][j] == 'M')
+				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_enemy, j * 64, i * 64);
+			j++;
 		}
-	i++;
+		i++;
 	}
 }
-int update(t_so_long *stack)
+
+int	update(t_so_long *stack)
 {
-	if(stack->enemy->fps == 0)
+	int	counter;
+
+	counter = 0;
+	if (stack->enemy->fps == 0)
 		stack->enemy->fps = 30;
-	if(stack->data->anim_fps == 0)
+	if (stack->data->anim_fps == 0)
 		stack->data->anim_fps = 70;
-	if(stack->data->anim_c_fps == 0)
+	if (stack->data->anim_c_fps == 0)
 		stack->data->anim_c_fps = 30;
-	for (int counter = 0; counter < stack->enemy->ctr; counter++){
+	while (counter < stack->enemy->ctr)
+	{
+		counter++;
 		move_enemy(stack, counter);
-	};
+	}
 	stack->enemy->fps--;
-	memset(stack->enemy->pos_x, 0, sizeof(int) * stack->enemy->ctr);
-	memset(stack->enemy->pos_y, 0, sizeof(int) * stack->enemy->ctr);
-	mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
-	anim_enemy(stack);
-	draw_level(stack);
-	print_text(stack);
-	return(0);
+	memset (stack->enemy->pos_x, 0, sizeof(int) * stack->enemy->ctr);
+	memset (stack->enemy->pos_y, 0, sizeof(int) * stack->enemy->ctr);
+	mlx_clear_window (stack->data->mlx, stack->data->mlx_win);
+	anim_enemy (stack);
+	draw_level (stack);
+	print_text (stack);
+	return (0);
 }
 
 void	level_init(t_so_long *stack)
 {
-
 	stack->data->mlx = mlx_init();
-	stack->data->mlx_win = mlx_new_window(stack->data->mlx, stack->level->column * 64, (stack->level->rows + 0.5) * 64, "Pokemon - Pikachu wants to go home!!!!");
-	if(!stack->data)
-		exit(2);
-	stack->data->img_wall = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/grass.xpm", &stack->data->w, &stack->data->h);
-	stack->data->img_player = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/pikachu.xpm", &stack->data->w, &stack->data->h);
-	stack->data->img_exit = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/pokeball.xpm", &stack->data->w, &stack->data->h);
-	stack->data->background = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/back.xpm", &stack->data->w, &stack->data->h);
-	stack->data->img_coin = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/onigiri.xpm", &stack->data->w, &stack->data->h);
-	stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-0.xpm", &stack->data->w, &stack->data->h);
-	stack->data->background_D = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/grass-dirt.xpm", &stack->data->w, &stack->data->h);
+	stack->data->mlx_win = mlx_new_window(stack->data->mlx, \
+	stack->level->column * 64, (stack->level->rows + 0.5) * 64, \
+	"Pokemon - Pikachu wants to go home!!!!");
+	if (!stack->data)
+		exit (2);
+	stack->data->img_wall = mlx_xpm_file_to_image(stack->data->mlx, \
+	"imgs/xpm/grass.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_player = mlx_xpm_file_to_image(stack->data->mlx, \
+	"imgs/xpm/pikachu.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_exit = mlx_xpm_file_to_image(stack->data->mlx, \
+	"imgs/xpm/pokeball.xpm", &stack->data->w, &stack->data->h);
+	stack->data->background = mlx_xpm_file_to_image(stack->data->mlx, \
+	"imgs/xpm/back.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_coin = mlx_xpm_file_to_image(stack->data->mlx, \
+	"imgs/xpm/onigiri.xpm", &stack->data->w, &stack->data->h);
+	stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, \
+	"imgs/xpm/gengar-frame-0.xpm", &stack->data->w, &stack->data->h);
+	stack->data->background_D = mlx_xpm_file_to_image(stack->data->mlx, \
+	"imgs/xpm/grass-dirt.xpm", &stack->data->w, &stack->data->h);
 	mlx_loop_hook(stack->data->mlx, &update, stack);
 	mlx_hook(stack->data->mlx_win, 2, 0, key_hook, stack);
 	mlx_loop(stack->data->mlx);
 }
-
-
