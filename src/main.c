@@ -6,11 +6,45 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/11 06:18:26 by codespace        ###   ########.fr       */
+/*   Updated: 2024/03/12 07:10:29 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	check_level(char *level, t_so_long *stack)
+{
+	int	i;
+	int	player_count;
+	int	exit_count;
+
+	i = 0;
+	player_count = 0;
+	exit_count = 0;
+	stack->level->coins = 0;
+	while (level[i] != '\0')
+	{
+		if (level[i] == 'P')
+			player_count++;
+		else if (level[i] == 'E')
+			exit_count++;
+		else if (level[i] == 'M')
+			stack->enemy->ctr++;
+		else if (level[i] == 'C')
+			stack->level->coins++;
+		else if (level[i] != '1' && level[i] != '0' && level[i] != '\n')
+		{
+			printf ("Non valid char found in map -- Exiting\n");
+			exit (2);
+		}
+		i++;
+	}
+	if (player_count != 1 || exit_count != 1 || stack->level->coins == 0)
+	{
+		printf ("Invalid level configuration -- Exiting\n");
+		exit (2);
+	}
+}
 
 void	checks(t_so_long *stack, char *level)
 {

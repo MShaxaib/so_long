@@ -12,61 +12,93 @@
 
 #include "so_long.h"
 
-void anim_enemy(t_so_long *stack)
+void	anim_enemy(t_so_long *stack)
 {
-	if(stack->data->anim_fps >= 35)
-		stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-0.xpm", &stack->data->w, &stack->data->h);
-	if(stack->data->anim_fps < 35)
-		stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, "imgs/xpm/gengar-frame-1.xpm", &stack->data->w, &stack->data->h);
+	if (stack->data->anim_fps >= 35)
+		stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, \
+		"imgs/xpm/gengar-frame-0.xpm", &stack->data->w, &stack->data->h);
+	if (stack->data->anim_fps < 35)
+		stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, \
+		"imgs/xpm/gengar-frame-1.xpm", &stack->data->w, &stack->data->h);
 	stack->data->anim_fps--;
 }
 
-void move_enemy(t_so_long *stack, int counter)      ///// BIG CHANGE
+void	checknmove(t_so_long *sl, int ctr, int oldx, int oldy)
 {
-	int old_pos_x;
-	int old_pos_y;
+	if (sl->level->level[oldy][oldx + 1] == '1' \
+	|| sl->level->level[oldy][oldx + 1] == 'C' \
+	|| sl->level->level[oldy][oldx + 1] == 'E')
+		sl->enemy->flag[ctr] = 0;
+	if (sl->enemy->flag[ctr] == 0)
+	{
+		if (sl->level->level[oldy][oldx - 1] == '0' \
+		|| sl->level->level[oldy][oldx - 1] == 'P')
+		{
+			if (sl->level->level[oldy][oldx - 1] == 'P')
+				exitandfree(sl, 1);
+			sl->level->level[oldy][oldx] = '0';
+			sl->level->level[sl->enemy->pos_y \
+			[ctr]][sl->enemy->pos_x[ctr] - 1] = 'M';
+		}
+		if (sl->level->level[oldy][oldx - 1] == '1' \
+		|| sl->level->level[oldy][oldx - 1] == 'C' \
+		|| sl->level->level[oldy][oldx - 1] == 'E')
+			sl->enemy->flag[ctr] = 1;
+	}
+	if (sl->enemy->flag[ctr] == 1)
+	{
+		if (sl->level->level[oldy][oldx + 1] == '0' \
+		|| sl->level->level[oldy][oldx + 1] == 'P')
+		{
+			if (sl->level->level[oldy][oldx + 1] == 'P')
+				exitandfree(sl, 0);
+			sl->level->level[oldy][oldx] = '0';
+			sl->level->level[sl->enemy->pos_y \
+			[ctr]][sl->enemy->pos_x[ctr] + 1] = 'M';
+		}
+	}
+}
 
-    find_enemy(stack, counter + 1);
-    old_pos_x = stack->enemy->pos_x[counter];
-    old_pos_y = stack->enemy->pos_y[counter];
-    if(stack->enemy->ctr != 0)
-    {
-        if (stack->enemy->fps == 1)
-        {
-            if(stack->level->level[old_pos_y][old_pos_x + 1] == '1' || stack->level->level[old_pos_y][old_pos_x + 1] == 'C' || stack->level->level[old_pos_y][old_pos_x + 1] == 'E')
-                stack->enemy->flag[counter] = 0;
-            if (stack->enemy->flag[counter] == 0)
-            {
-                if(stack->level->level[old_pos_y][old_pos_x - 1] == '0' || stack->level->level[old_pos_y][old_pos_x - 1] == 'P')
-                {
-                    if(stack->level->level[old_pos_y][old_pos_x - 1] == 'P')
-                    {
-                        printf("<--------YOU DED-------->\n");
-                        mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
-                        mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
-                        exit(0);
-                    }
-                    stack->level->level[old_pos_y][old_pos_x] = '0';
-                    stack->level->level[stack->enemy->pos_y[counter]][stack->enemy->pos_x[counter] - 1] = 'M';
-                }
-                if(stack->level->level[old_pos_y][old_pos_x - 1] == '1' || stack->level->level[old_pos_y][old_pos_x - 1] == 'C' || stack->level->level[old_pos_y][old_pos_x - 1] == 'E')
-                    stack->enemy->flag[counter] = 1;
-            }
-            if(stack->enemy->flag[counter] == 1)
-            {
-                if(stack->level->level[old_pos_y][old_pos_x + 1] == '0' || stack->level->level[old_pos_y][old_pos_x + 1] == 'P')
-                {
-                    if(stack->level->level[old_pos_y][old_pos_x + 1] == 'P')
-                    {
-                        printf("<--------YOU DED-------->\n");
-                        mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
-                        mlx_destroy_window(stack->data->mlx, stack->data->mlx_win);
-                        exit(0);
-                    }
-                    stack->level->level[old_pos_y][old_pos_x] = '0';
-                    stack->level->level[stack->enemy->pos_y[counter]][stack->enemy->pos_x[counter] + 1] = 'M';
-                }
-            }
-        }
-    }
+void	find_enemy(t_so_long *stack, int counter)
+{
+	int	i;
+	int	j;
+	int	enemy_number;
+
+	enemy_number = 0;
+	i = 0;
+	while (i < stack->level->rows)
+	{
+		j = 0;
+		while (j < stack->level->column)
+		{
+			if (stack->level->level[i][j] == 'M')
+				enemy_number++;
+			if (enemy_number == counter)
+			{
+				stack->enemy->pos_y[counter - 1] = i;
+				stack->enemy->pos_x[counter - 1] = j;
+				break ;
+			}
+			j++;
+		}
+		if (enemy_number == counter)
+			break ;
+		i++;
+	}
+	if (!enemy_number)
+		printf("Enemies not found\n");
+}
+
+void	move_enemy(t_so_long *sl, int ctr)
+{
+	int	oldx;
+	int	oldy;
+
+	find_enemy (sl, ctr + 1);
+	oldx = sl->enemy->pos_x[ctr];
+	oldy = sl->enemy->pos_y[ctr];
+	if (sl->enemy->ctr != 0)
+		if (sl->enemy->fps == 1)
+			checknmove(sl, ctr, oldx, oldy);
 }

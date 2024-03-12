@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/11 08:25:15 by codespace        ###   ########.fr       */
+/*   Updated: 2024/03/12 07:31:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,35 @@ int	key_hook(int keycode, t_so_long *stack)
 	return (0);
 }
 
-void	draw_level(t_so_long *stack)
+void	draw_level(t_so_long *sl)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (stack->level->level[i] != NULL)
+	while (sl->level->level[i] != NULL)
 	{
 		j = 0;
-		while (stack->level->level[i][j] != '\n' && stack->level->level[i][j] != '\0')
+		while (sl->level->level[i][j] != '\n' && sl->level->level[i][j] != '\0')
 		{
-			mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->background, j * 64, i * 64);
-			if (stack->level->level[i][j] == '1')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_wall, j * 64, i * 64);
-			else if (stack->level->level[i][j] == 'P')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_player, j * 64, i * 64);
-			else if (stack->level->level[i][j] == 'E')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_exit, j * 64, i * 64);
-			else if (stack->level->level[i][j] == 'C')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_coin, j * 64, i * 64);
-			else if (stack->level->level[i][j] == 'M')
-				mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, stack->data->img_enemy, j * 64, i * 64);
+			mlx_put_image_to_window(sl->data->mlx, \
+			sl->data->mlx_win, sl->data->background, j * 64, i * 64);
+			if (sl->level->level[i][j] == '1')
+				mlx_put_image_to_window(sl->data->mlx, \
+				sl->data->mlx_win, sl->data->img_wall, j * 64, i * 64);
+			else if (sl->level->level[i][j] == 'P')
+				mlx_put_image_to_window(sl->data->mlx, \
+				sl->data->mlx_win, sl->data->img_player, j * 64, i * 64);
+			else if (sl->level->level[i][j] == 'E')
+				mlx_put_image_to_window(sl->data->mlx, \
+				sl->data->mlx_win, sl->data->img_exit, j * 64, i * 64);
+			else if (sl->level->level[i][j] == 'C')
+				mlx_put_image_to_window(sl->data->mlx, \
+				sl->data->mlx_win, sl->data->img_coin, j * 64, i * 64);
+			else if (sl->level->level[i][j] == 'M')
+				mlx_put_image_to_window(sl->data->mlx, \
+				sl->data->mlx_win, sl->data->img_enemy, j * 64, i * 64);
 			j++;
 		}
 		i++;
@@ -129,7 +135,7 @@ void	level_init(t_so_long *stack)
 	"imgs/xpm/onigiri.xpm", &stack->data->w, &stack->data->h);
 	stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, \
 	"imgs/xpm/gengar-frame-0.xpm", &stack->data->w, &stack->data->h);
-	stack->data->background_D = mlx_xpm_file_to_image(stack->data->mlx, \
+	stack->data->background_d = mlx_xpm_file_to_image(stack->data->mlx, \
 	"imgs/xpm/grass-dirt.xpm", &stack->data->w, &stack->data->h);
 	mlx_loop_hook(stack->data->mlx, &update, stack);
 	mlx_hook(stack->data->mlx_win, 2, 0, key_hook, stack);
