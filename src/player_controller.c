@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controller.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 21:50:47 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/12 06:20:33 by codespace        ###   ########.fr       */
+/*   Updated: 2024/03/12 13:43:08 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ void	move_up(t_so_long *sl)
 	{
 		if (sl->level->coins == sl->level->coins_collected)
 		{
-			printf("<--------YOU WIN-------->\n");
 			exitandfree(sl, 1);
 			return ;
 		}
 	}
 	if (sl->level->level[sl->player->pos_y - 1][sl->player->pos_x] == 'M')
 	{
-		printf("<--------YOU DED-------->\n");
 		exitandfree(sl, 0);
 		return ;
 	}
@@ -49,14 +47,12 @@ void	move_down(t_so_long *sl)
 	{
 		if (sl->level->coins == sl->level->coins_collected)
 		{
-			printf("<--------YOU WIN-------->\n");
 			exitandfree(sl, 1);
 		}
 		return ;
 	}
 	if (sl->level->level[sl->player->pos_y + 1][sl->player->pos_x] == 'M')
 	{
-		printf("<--------YOU DED-------->\n");
 		exitandfree(sl, 0);
 		return ;
 	}
@@ -76,14 +72,12 @@ void	move_left(t_so_long *sl)
 	{
 		if (sl->level->coins == sl->level->coins_collected)
 		{
-			printf("<--------YOU WIN-------->\n");
 			exitandfree(sl, 1);
 		}
 		return ;
 	}
 	if (sl->level->level[sl->player->pos_y][sl->player->pos_x - 1] == 'M')
 	{
-		printf("<--------YOU DED-------->\n");
 		exitandfree(sl, 0);
 		return ;
 	}
@@ -103,14 +97,12 @@ void	move_right(t_so_long *sl)
 	{
 		if (sl->level->coins == sl->level->coins_collected)
 		{
-			printf("<--------YOU WIN-------->\n");
 			exitandfree(sl, 1);
 		}
 		return ;
 	}
 	if (sl->level->level[sl->player->pos_y][sl->player->pos_x + 1] == 'M')
 	{
-		printf("<--------YOU DED-------->\n");
 		exitandfree(sl, 0);
 		return ;
 	}

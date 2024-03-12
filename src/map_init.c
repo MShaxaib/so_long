@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/12 07:31:28 by codespace        ###   ########.fr       */
+/*   Updated: 2024/03/12 13:41:56 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ int	update(t_so_long *stack)
 		stack->data->anim_c_fps = 30;
 	while (counter < stack->enemy->ctr)
 	{
-		counter++;
 		move_enemy(stack, counter);
+		counter++;
 	}
 	stack->enemy->fps--;
 	memset (stack->enemy->pos_x, 0, sizeof(int) * stack->enemy->ctr);

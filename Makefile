@@ -16,7 +16,7 @@ SRCPATH_DIR	=	src/
 SRCPATH		=	$(addprefix $(SRCPATH_DIR), $(SRCPATH_SRCS))
 OBJ_SRC		=	$(SRCPATH:.c=.o)
 
-UTILSPATH_SRCS	=ft_split.c ft_strdup.c ft_memset.c ft_itoa.c
+UTILSPATH_SRCS	=ft_split.c ft_strdup.c ft_memset.c ft_itoa.c ft_memcpy.c
 UTILSPATH_DIR	=utils/
 UTILSPATH		=$(addprefix $(UTILSPATH_DIR), $(UTILSPATH_SRCS))
 OBJ_UTILS		=$(UTILSPATH:.c=.o)
