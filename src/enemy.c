@@ -23,6 +23,19 @@ void	anim_enemy(t_so_long *stack)
 	stack->data->anim_fps--;
 }
 
+void	checknmove_reverse(t_so_long *sl, int ctr, int oldx, int oldy)
+{
+	if (sl->level->level[oldy][oldx + 1] == '0' \
+	|| sl->level->level[oldy][oldx + 1] == 'P')
+	{
+		if (sl->level->level[oldy][oldx + 1] == 'P')
+			exitandfree(sl, 0);
+		sl->level->level[oldy][oldx] = '0';
+		sl->level->level[sl->enemy->pos_y \
+		[ctr]][sl->enemy->pos_x[ctr] + 1] = 'M';
+	}
+}
+
 void	checknmove(t_so_long *sl, int ctr, int oldx, int oldy)
 {
 	if (sl->level->level[oldy][oldx + 1] == '1' \
@@ -46,17 +59,7 @@ void	checknmove(t_so_long *sl, int ctr, int oldx, int oldy)
 			sl->enemy->flag[ctr] = 1;
 	}
 	if (sl->enemy->flag[ctr] == 1)
-	{
-		if (sl->level->level[oldy][oldx + 1] == '0' \
-		|| sl->level->level[oldy][oldx + 1] == 'P')
-		{
-			if (sl->level->level[oldy][oldx + 1] == 'P')
-				exitandfree(sl, 0);
-			sl->level->level[oldy][oldx] = '0';
-			sl->level->level[sl->enemy->pos_y \
-			[ctr]][sl->enemy->pos_x[ctr] + 1] = 'M';
-		}
-	}
+		checknmove_reverse(sl, ctr, oldx, oldy);
 }
 
 void	find_enemy(t_so_long *stack, int counter)
@@ -86,8 +89,6 @@ void	find_enemy(t_so_long *stack, int counter)
 			break ;
 		i++;
 	}
-	if (!enemy_number)
-		printf("Enemies not found\n");
 }
 
 void	move_enemy(t_so_long *sl, int ctr)
