@@ -6,7 +6,7 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/13 18:01:56 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/13 20:44:10 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ typedef struct t_so_long
 	t_enemy		*enemy;
 }		t_so_long;
 
+/*------------------------Parsing--------------------------------*/
+
 void	init_level_stack(t_so_long *stack);
 char	*read_level(char *levelname);
 void	check_level(char *level, t_so_long *stack);
@@ -94,13 +96,13 @@ void	find_player(t_so_long *stack);
 void	find_enemy(t_so_long *stack, int counter);
 void	find_exit(t_so_long *stack);
 
-//
+/*------------------------Path Finding---------------------------*/
 
 int		check_path(t_level *ls, int start_x, int start_y, char endpoint);
 int		path_finding(t_so_long *stack);
 int		init_visited(t_level *ls, int malloced);
 
-//
+/*------------------------Utils----------------------------------*/
 
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *src);
@@ -108,23 +110,23 @@ size_t	ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
 char	*ft_itoa(int n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+/*------------------------MlX------------------------------------*/
 
-// MLX
 void	draw_level(t_so_long *stack);
 void	level_init(t_so_long *stack);
 
-// Player_controller
+/*------------------------Player Controller----------------------*/
 
 void	player_controller(t_so_long *stack, char dir);
 void	put_zero(t_so_long *stack);
 
-//
+/*------------------------Exit & Free----------------------------*/
 
 void	exitandfree(t_so_long *stack, int flag);
 void	printandexit(const char *error, int error_code);
 void	print_text(t_so_long *stack);
 
-//
+/*------------------------Enemy----------------------------------*/
 
 void	move_enemy(t_so_long *stack, int counter);
 void	anim_enemy(t_so_long *stack);

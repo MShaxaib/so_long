@@ -6,7 +6,7 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:48 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/13 18:22:55 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/13 20:21:43 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ractangle_check(char *level, t_so_long *stack)
 
 	row_length = 0;
 	i = 0;
-	stack->level->rows = 1;
 	while (level[i] != '\0')
 	{
 		j = 0;
@@ -67,7 +66,7 @@ void	ractangle_check(char *level, t_so_long *stack)
 		if (row_length == 0)
 			row_length = j;
 		else if (row_length != j)
-				printandexit("Map is not rectangle", 1);
+			printandexit("Map is not rectangle", 1);
 		if (level[i] == '\n')
 		{
 			stack->level->rows++;

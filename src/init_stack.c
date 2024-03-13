@@ -6,7 +6,7 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:27:15 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/13 17:58:30 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/13 19:05:32 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_level_stack(t_so_long *stack)
 	stack->exit = malloc (sizeof(t_exit));
 	stack->enemy = malloc (sizeof(t_enemy));
 	stack->level->coins_collected = 0;
+	stack->level->rows = 1;
 	stack->level->moves = 1;
 	stack->enemy->ctr = 0;
 	stack->enemy->fps = 30;
