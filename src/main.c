@@ -6,7 +6,7 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/13 11:25:26 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/13 11:30:53 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int ac, char **av)
 		return (1);
 	init_level_stack(stack);
 	checks (stack, level);
-	// level_init (stack);
+	level_init (stack);
 	free_exit (stack, level);
 	return (0);
 }

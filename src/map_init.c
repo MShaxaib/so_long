@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/12 19:53:21 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:49:29 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	print_text(t_so_long *stack)
 	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
 	(stack->level->column - 0.5) * 64, stack->level->rows * 64, \
 	0x00FFCCFF, ft_itoa(stack->level->coins));
+	mlx_destroy_image(stack->data->mlx, stack->data->black);
 }
 
 int	key_hook(int keycode, t_so_long *stack)
@@ -110,8 +111,8 @@ int	update(t_so_long *stack)
 	memset (stack->enemy->pos_y, 0, sizeof(int) * stack->enemy->ctr);
 	mlx_clear_window (stack->data->mlx, stack->data->mlx_win);
 	anim_enemy (stack);
-	draw_level (stack);
 	print_text (stack);
+	draw_level (stack);
 	return (0);
 }
 

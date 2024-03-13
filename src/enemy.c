@@ -15,11 +15,19 @@
 void	anim_enemy(t_so_long *stack)
 {
 	if (stack->data->anim_fps >= 35)
+		{
+		mlx_destroy_image(stack->data->mlx, stack->data->img_enemy);
 		stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, \
 		"imgs/xpm/gengar-frame-0.xpm", &stack->data->w, &stack->data->h);
+		printf("1\n");
+		}
 	if (stack->data->anim_fps < 35)
+		{
+		mlx_destroy_image(stack->data->mlx, stack->data->img_enemy);
 		stack->data->img_enemy = mlx_xpm_file_to_image(stack->data->mlx, \
 		"imgs/xpm/gengar-frame-1.xpm", &stack->data->w, &stack->data->h);
+		printf("2\n");
+		}
 	stack->data->anim_fps--;
 }
 
