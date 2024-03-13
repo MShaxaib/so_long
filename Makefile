@@ -21,6 +21,8 @@ UTILSPATH_DIR	=utils/
 UTILSPATH		=$(addprefix $(UTILSPATH_DIR), $(UTILSPATH_SRCS))
 OBJ_UTILS		=$(UTILSPATH:.c=.o)
 
+BONUS_NAME 	=	so_long_bonus
+
 #COMMANDS
 %.o: %.c $(HEADER) Makefile
 				@${CC} ${CFLAGS} -c $< -o $@
@@ -39,12 +41,12 @@ clean:
 				@echo "$(YELLOW)Object Files Deleted!$(DEFAULT)"
 
 fclean:			clean
-				@$(RM) $(NAME)
+				@$(RM) $(NAME) $(BONUS_NAME)
 				@echo "$(RED)All Deleted!$(DEFAULT)"
 
-# bonus:			$(OBJ_F) $(OBJ_SRC) $(OBJ_B) $(OBJ_GNL) $(OBJ_BONUS)
-# 				@$(CC) ${CFLAGS} $(OBJ_F) $(OBJ_SRC) $(OBJ_B) $(OBJ_GNL) $(OBJ_BONUS) -o checker
-# 				@echo "$(PINK)$(BONUS_NAME) with bonus created!$(DEFAULT)"
+bonus:			$(OBJ_SRC) $(OBJ_UTILS) $(MLX)
+				@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ_SRC) $(OBJ_UTILS) $(MLX) -o $(BONUS_NAME)
+				@echo "$(PINK)so_long with bonus created!$(DEFAULT)"
 
 re:				fclean all
 
