@@ -6,35 +6,11 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:03:22 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/13 12:49:29 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:02:43 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	print_text(t_so_long *stack)
-{
-	stack->data->black = mlx_new_image(stack->data->mlx, 1000, 328);
-	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, \
-	stack->data->black, (stack->level->column - 14) * 64, \
-	(stack->level->rows) * 64);
-	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
-	(stack->level->column - 12.8) * 64, stack->level->rows * 64, \
-	0x00FFCCFF, "Number of moves:");
-	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
-	(stack->level->column - 10.3) * 64, stack->level->rows * 64, \
-	0x00FFCCFF, ft_itoa(stack->level->moves));
-	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
-	(stack->level->column - 3.5) * 64, stack->level->rows * 64, \
-	0x00FFCCFF, "Coins Collected:  /");
-	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
-	(stack->level->column - 0.9) * 64, stack->level->rows * 64, \
-	0x00FFCCFF, ft_itoa(stack->level->coins_collected));
-	mlx_string_put(stack->data->mlx, stack->data->mlx_win, \
-	(stack->level->column - 0.5) * 64, stack->level->rows * 64, \
-	0x00FFCCFF, ft_itoa(stack->level->coins));
-	mlx_destroy_image(stack->data->mlx, stack->data->black);
-}
 
 int	key_hook(int keycode, t_so_long *stack)
 {
@@ -55,6 +31,27 @@ int	key_hook(int keycode, t_so_long *stack)
 	return (0);
 }
 
+void	drawtiles(t_so_long *sl, int i, int j)
+{
+	mlx_put_image_to_window(sl->data->mlx, \
+	sl->data->mlx_win, sl->data->background, j * 64, i * 64);
+	if (sl->level->level[i][j] == '1')
+		mlx_put_image_to_window(sl->data->mlx, \
+		sl->data->mlx_win, sl->data->img_wall, j * 64, i * 64);
+	else if (sl->level->level[i][j] == 'P')
+		mlx_put_image_to_window(sl->data->mlx, \
+		sl->data->mlx_win, sl->data->img_player, j * 64, i * 64);
+	else if (sl->level->level[i][j] == 'E')
+		mlx_put_image_to_window(sl->data->mlx, \
+		sl->data->mlx_win, sl->data->img_exit, j * 64, i * 64);
+	else if (sl->level->level[i][j] == 'C')
+		mlx_put_image_to_window(sl->data->mlx, \
+		sl->data->mlx_win, sl->data->img_coin, j * 64, i * 64);
+	else if (sl->level->level[i][j] == 'M')
+		mlx_put_image_to_window(sl->data->mlx, \
+		sl->data->mlx_win, sl->data->img_enemy, j * 64, i * 64);
+}
+
 void	draw_level(t_so_long *sl)
 {
 	int	i;
@@ -67,23 +64,7 @@ void	draw_level(t_so_long *sl)
 		j = 0;
 		while (sl->level->level[i][j] != '\n' && sl->level->level[i][j] != '\0')
 		{
-			mlx_put_image_to_window(sl->data->mlx, \
-			sl->data->mlx_win, sl->data->background, j * 64, i * 64);
-			if (sl->level->level[i][j] == '1')
-				mlx_put_image_to_window(sl->data->mlx, \
-				sl->data->mlx_win, sl->data->img_wall, j * 64, i * 64);
-			else if (sl->level->level[i][j] == 'P')
-				mlx_put_image_to_window(sl->data->mlx, \
-				sl->data->mlx_win, sl->data->img_player, j * 64, i * 64);
-			else if (sl->level->level[i][j] == 'E')
-				mlx_put_image_to_window(sl->data->mlx, \
-				sl->data->mlx_win, sl->data->img_exit, j * 64, i * 64);
-			else if (sl->level->level[i][j] == 'C')
-				mlx_put_image_to_window(sl->data->mlx, \
-				sl->data->mlx_win, sl->data->img_coin, j * 64, i * 64);
-			else if (sl->level->level[i][j] == 'M')
-				mlx_put_image_to_window(sl->data->mlx, \
-				sl->data->mlx_win, sl->data->img_enemy, j * 64, i * 64);
+			drawtiles (sl, i, j);
 			j++;
 		}
 		i++;

@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   path_finding.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:44:47 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/12 06:47:46 by codespace        ###   ########.fr       */
+/*   Updated: 2024/03/13 17:11:41 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	is_enclosed(char *level, t_so_long *stack)
+{
+	int	i;
+	int	start_index;
+
+	i = 0;
+	start_index = (stack->level->rows - 1) * (stack->level->column + 1);
+	while (level[i] != '\n')
+		if (level[i++] != '1')
+			exit(2);
+	i = start_index;
+	while (level[i] != '\0')
+		if (level[i++] != '1')
+			exit(2);
+	i = 0;
+	while (i < stack->level->rows)
+	{
+		if (level[i * (stack->level->column + 1)] != '1' \
+		|| level[i * (stack->level->column + 1) + \
+		stack->level->column - 1] != '1')
+			exit(2);
+		i++;
+	}
+}
 
 char	find_startpoint(t_level *ls, int *x, int *y)
 {

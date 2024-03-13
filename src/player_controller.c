@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controller.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshazaib <mshazaib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 21:50:47 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/12 16:58:48 by mshazaib         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:52:12 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,15 +114,6 @@ int	move_right(t_so_long *sl)
 	sl->data->img_player, (sl->player->pos_x + 1) * 64, \
 	sl->player->pos_y * 64);
 	return (1);
-}
-
-void	put_zero(t_so_long *stack)
-{
-	stack->level->moves++;
-	stack->level->level[stack->player->pos_y][stack->player->pos_x] = '0';
-	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, \
-	stack->data->background, stack->player->pos_x * 64, \
-	stack->player->pos_y * 64);
 }
 
 void	player_controller(t_so_long *stack, char dir)

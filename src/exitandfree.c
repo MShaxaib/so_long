@@ -6,7 +6,7 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 19:43:43 by vtcsbza           #+#    #+#             */
-/*   Updated: 2024/03/13 12:44:44 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/13 17:39:11 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	exitandfree(t_so_long *stack, int flag)
 {
 	if (flag == 1)
-		printf("<-----------YOU WIN------------>\n");
+		write(1, "<-----------YOU WIN------------>\n", 34);
 	else
-		printf("<-----------YOU DED------------>\n");
+		write(1, "<-----------YOU DED------------>\n", 34);
 	mlx_clear_window(stack->data->mlx, stack->data->mlx_win);
 	mlx_destroy_image(stack->data->mlx, stack->data->img_coin);
 	mlx_destroy_image(stack->data->mlx, stack->data->img_enemy);

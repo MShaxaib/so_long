@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:48 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/12 07:10:20 by codespace        ###   ########.fr       */
+/*   Updated: 2024/03/13 18:22:55 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	printandexit(const char *error, int error_code)
+{
+	int	len;
+
+	len = 0;
+	while (error[len] != '\0')
+		len++;
+	write (1, error, len);
+	write (1, "\n", 1);
+	exit (error_code);
+}
 
 char	*read_level(char *levelname)
 {
@@ -22,22 +34,13 @@ char	*read_level(char *levelname)
 	level_bytes = NULL;
 	fd = open(levelname, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("Error opening file");
-		exit(2);
-	}
+		printandexit("Error Opening File", 2);
 	level_bytes = malloc(BUFFER_SIZE * sizeof(char));
 	if (level_bytes == NULL)
-	{
-		perror("Error allocating memory");
-		exit(1);
-	}
+		printandexit("Error allocating memory", 1);
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read == -1)
-	{
-		perror("Error reading file");
-		exit(1);
-	}
+		printandexit("Error reading file", 1);
 	close(fd);
 	ft_memcpy(level_bytes, buffer, bytes_read);
 	level_bytes[bytes_read] = '\0';
@@ -63,14 +66,8 @@ void	ractangle_check(char *level, t_so_long *stack)
 		}
 		if (row_length == 0)
 			row_length = j;
-		else
-		{
-			if (row_length != j)
-			{
-				printf("Map is not rectangle\n");
-				exit(2);
-			}
-		}
+		else if (row_length != j)
+				printandexit("Map is not rectangle", 1);
 		if (level[i] == '\n')
 		{
 			stack->level->rows++;
@@ -78,31 +75,6 @@ void	ractangle_check(char *level, t_so_long *stack)
 		}
 	}
 	stack->level->column = j;
-}
-
-void	is_enclosed(char *level, t_so_long *stack)
-{
-	int	i;
-	int	start_index;
-
-	i = 0;
-	start_index = (stack->level->rows - 1) * (stack->level->column + 1);
-	while (level[i] != '\n')
-		if (level[i++] != '1')
-			exit(2);
-	i = start_index;
-	while (level[i] != '\0')
-		if (level[i++] != '1')
-			exit(2);
-	i = 0;
-	while (i < stack->level->rows)
-	{
-		if (level[i * (stack->level->column + 1)] != '1' \
-		|| level[i * (stack->level->column + 1) + \
-		stack->level->column - 1] != '1')
-			exit(2);
-		i++;
-	}
 }
 
 void	find_player(t_so_long *stack)
@@ -129,7 +101,7 @@ void	find_player(t_so_long *stack)
 		i++;
 	}
 	if (!found)
-		printf("Player not found\n");
+		write(1, "Player not found\n", 18);
 }
 
 void	find_exit(t_so_long *stack)
@@ -156,5 +128,5 @@ void	find_exit(t_so_long *stack)
 		i++;
 	}
 	if (!found)
-		printf("exit not found\n");
+		write(1, "exit not found\n", 16);
 }

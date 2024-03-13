@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:46 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/12 06:50:57 by codespace        ###   ########.fr       */
+/*   Updated: 2024/03/13 18:01:56 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,13 @@ void	level_init(t_so_long *stack);
 // Player_controller
 
 void	player_controller(t_so_long *stack, char dir);
+void	put_zero(t_so_long *stack);
 
 //
 
 void	exitandfree(t_so_long *stack, int flag);
+void	printandexit(const char *error, int error_code);
+void	print_text(t_so_long *stack);
 
 //
 

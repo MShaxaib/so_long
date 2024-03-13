@@ -6,7 +6,7 @@
 /*   By: vtcsbza <vtcsbza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:58:52 by mshazaib          #+#    #+#             */
-/*   Updated: 2024/03/13 11:30:53 by vtcsbza          ###   ########.fr       */
+/*   Updated: 2024/03/13 17:43:39 by vtcsbza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,20 @@ void	check_level(char *level, t_so_long *stack)
 		else if (level[i] == 'C')
 			stack->level->coins++;
 		else if (level[i] != '1' && level[i] != '0' && level[i] != '\n')
-		{
-			printf ("Non valid char found in map -- Exiting\n");
-			exit (2);
-		}
+			printandexit ("Non Valid Char found in Map -- Exiting\n", 2);
 		i++;
 	}
 	if (player_count != 1 || exit_count != 1 || stack->level->coins == 0)
-	{
-		printf ("Invalid level configuration -- Exiting\n");
-		exit (2);
-	}
+		printandexit("Invalid Level Configuration -- Exiting\n", 2);
+}
+
+void	put_zero(t_so_long *stack)
+{
+	stack->level->moves++;
+	stack->level->level[stack->player->pos_y][stack->player->pos_x] = '0';
+	mlx_put_image_to_window(stack->data->mlx, stack->data->mlx_win, \
+	stack->data->background, stack->player->pos_x * 64, \
+	stack->player->pos_y * 64);
 }
 
 void	checks(t_so_long *stack, char *level)
@@ -55,10 +58,7 @@ void	checks(t_so_long *stack, char *level)
 	find_player (stack);
 	find_exit (stack);
 	if (path_finding (stack) == 0)
-	{
-		printf("no valid path to exit\n");
-		exit(2);
-	}
+		printandexit("No Valid Path to Exit\n", 2);
 	stack->enemy->pos_x = calloc(sizeof(int), stack->enemy->ctr);
 	stack->enemy->pos_y = calloc(sizeof(int), stack->enemy->ctr);
 	stack->enemy->flag = calloc(sizeof(int), stack->enemy->ctr);
